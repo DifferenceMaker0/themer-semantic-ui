@@ -2,13 +2,13 @@ import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
+import path from 'path';
 import { defineConfig } from 'vite';
-
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['src/cshop/js/jquery.min.js', 'resources/css/app.css', 'resources/css/main.css', 'resources/js/app.tsx', 'src/cshop/js/contact-form.js', 'src/cshop/js/main.js', 'src/cshop/js/materialize.min.js', 'resources/css/custom.css'],
+            input: ['resources/css/app.css', 'resources/js/app.tsx'],
             ssr: 'resources/js/ssr.tsx',
             refresh: true,
         }),
@@ -18,6 +18,16 @@ export default defineConfig({
             formVariants: true,
         }),
     ],
+    resolve: {
+        alias: {
+            "@": path.resolve(__dirname, "./resources/js"),
+            "@/components": path.resolve(__dirname, "./resources/js/components"),
+            "@/entities": path.resolve(__dirname, "./resources/js/entities"),
+            "@/integrations": path.resolve(__dirname, "./resources/js/integrations"),
+            "@/utils": path.resolve(__dirname, "./resources/js/utils"),
+            "@/types": path.resolve(__dirname, "./resources/js/types"),
+        },
+    },
     esbuild: {
         jsx: 'automatic',
     },

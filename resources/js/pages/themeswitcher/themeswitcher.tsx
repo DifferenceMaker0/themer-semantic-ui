@@ -1,17 +1,56 @@
+import { useState } from 'react';
+import { Head } from '@inertiajs/react';
 import './widget/tswitch.css';
-import ThemeSwitcherWidget from './widget/tswitch-widget';
 
-export const ThemeSwitcherWidgetDemo = () => {
-  return (
-    <main className="app-container themer-responsive">
-        <header>
-            <h1>Theme Switcher Widget Demo</h1>
-            <ThemeSwitcherWidget />
-        </header>
-        <h1>Hello, Themed World!</h1>
-        <button className="themer-button">Click Me</button>
-    </main>
-  );
+// Import the complete Themer Dashboard system
+import { AppSidebar } from './components/app-sidebar';
+import { MainContent } from './components/main-content';
+import { SidebarProvider } from './components/sidebar-provider';
+import { SettingsProvider } from './components/settings-provider';
+import { ArrowLeft } from 'lucide-react';
+
+export const ThemerDashboard = () => {
+    const [activeView, setActiveView] = useState('dashboard');
+
+    const handleNavigate = (view: string) => {
+        setActiveView(view);
+    };
+
+    const handleBackToStudioManager = () => {
+        // Navigate back to Studio Manager
+        window.location.href = '/dashboard';
+    };
+
+    return (
+        <>
+            <Head title="Themer Dashboard - Studio Manager" />
+            <SettingsProvider>
+                <SidebarProvider>
+                    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+                        {/* Back to Studio Manager Button */}
+                        <div className="fixed top-4 right-4 z-50">
+                            <button
+                                onClick={handleBackToStudioManager}
+                                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-lg transition-colors"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                                Back to Studio Manager
+                            </button>
+                        </div>
+
+                        {/* Themer Dashboard Layout */}
+                        <div className="flex h-screen">
+                            <AppSidebar
+                                activeView={activeView}
+                                onNavigate={handleNavigate}
+                            />
+                            <MainContent activeView={activeView} />
+                        </div>
+                    </div>
+                </SidebarProvider>
+            </SettingsProvider>
+        </>
+    );
 };
 
-export default ThemeSwitcherWidgetDemo;
+export default ThemerDashboard;

@@ -4,6 +4,7 @@ import { Menu, Palette, Store, BarChart3, Settings, Sun, Moon } from 'lucide-rea
 import { PetstoreWidget } from './petstore-widget';
 import { useSettings, useTheme } from './settings-provider';
 import { ThemerSemanticWidget } from '../semantic/themer-semantic-widget';
+import { ThemerSocialMediaWidget } from '../social-media/themer-social-media-widget';
 
 // Theme configuration
 const THEME_MODES = [
@@ -65,6 +66,11 @@ export function MainContent({ activeView = 'dashboard' }: MainContentProps) {
                     title: 'Semantic UI Components',
                     description: 'Interactive React components with Radix UI integration'
                 };
+            case 'social-media':
+                return {
+                    title: 'Social Media Generator',
+                    description: 'AI-powered social media content creation and management'
+                };
             case 'themer':
                 return {
                     title: 'Theme Management',
@@ -119,6 +125,7 @@ export function MainContent({ activeView = 'dashboard' }: MainContentProps) {
                 <div className="themer-container space-y-6">
                     {activeView === 'petstore' && <PetstoreWidget />}
                     {activeView === 'semantic' && <ThemerSemanticWidget />}
+                    {activeView === 'social-media' && <ThemerSocialMediaWidget />}
                     {activeView === 'dashboard' && (
                         <>
                             {/* Dashboard Content */}

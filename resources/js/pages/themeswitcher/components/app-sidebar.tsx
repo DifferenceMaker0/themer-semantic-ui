@@ -1,14 +1,15 @@
 import React from 'react';
 import { useSidebar } from './sidebar-provider';
 import { ThemerSidebar } from './theme-sidebar';
-import { 
-    LayoutGrid, 
-    Store, 
-    Palette, 
-    FileText, 
+import {
+    LayoutGrid,
+    Store,
+    Palette,
+    FileText,
     Settings,
     ChevronLeft,
-    Menu
+    Menu,
+    ArrowLeft
 } from 'lucide-react';
 
 interface NavigationItem {
@@ -41,6 +42,12 @@ const getNavigationItems = (activeView: string): NavigationItem[] => [
         href: 'semantic',
         icon: Palette,
         isActive: activeView === 'semantic'
+    },
+    {
+        title: 'Social Media',
+        href: 'social-media',
+        icon: Palette,
+        isActive: activeView === 'social-media'
     },
     {
         title: 'Theme Demo',
@@ -90,7 +97,7 @@ export function AppSidebar({ activeView = 'dashboard', onNavigate }: AppSidebarP
                         <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                             <Palette className="h-5 w-5 text-white" />
                         </div>
-                        <span className="font-semibold text-lg">ThemeApp</span>
+                        <span className="font-semibold text-lg">Themer Dashboard</span>
                     </div>
                     <button
                         onClick={() => setIsOpen(false)}
@@ -102,9 +109,20 @@ export function AppSidebar({ activeView = 'dashboard', onNavigate }: AppSidebarP
 
                 {/* Navigation */}
                 <div className="flex-1 overflow-y-auto">
+                    {/* Back to Studio Manager */}
+                    <div className="p-3 border-b border-gray-200 dark:border-gray-800">
+                        <button
+                            onClick={() => window.location.href = '/dashboard'}
+                            className="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-colors text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        >
+                            <ArrowLeft className="h-4 w-4" />
+                            <span>Back to Studio Manager</span>
+                        </button>
+                    </div>
+
                     <div className="p-3">
                         <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                            Platform
+                            Themer Dashboard
                         </div>
                         <nav className="space-y-1">
                             {navigationItems.map((item) => {

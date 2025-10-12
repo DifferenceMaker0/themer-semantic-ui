@@ -1,7 +1,6 @@
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
-import { ThemeSwitcherSidebar } from '@/components/theme-switcher-sidebar';
 import {
     Sidebar,
     SidebarContent,
@@ -11,10 +10,10 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, themer, petstore } from '@/routes';
+import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Palette, Store } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Palette, Users, Calendar, Clock, MessageSquare, DollarSign, BarChart3, FolderOpen } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -24,13 +23,43 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Pet Store',
-        href: petstore(),
-        icon: Store,
+        title: 'Projects',
+        href: '/projects',
+        icon: FolderOpen,
     },
     {
-        title: 'Theme Demo',
-        href: themer(),
+        title: 'Clients',
+        href: '/clients',
+        icon: Users,
+    },
+    {
+        title: 'Time Tracking',
+        href: '/time-tracking',
+        icon: Clock,
+    },
+    {
+        title: 'Communication',
+        href: '/communication',
+        icon: MessageSquare,
+    },
+    {
+        title: 'Financial',
+        href: '/financial-dashboard',
+        icon: DollarSign,
+    },
+    {
+        title: 'Analytics',
+        href: '/analytics',
+        icon: BarChart3,
+    },
+    {
+        title: 'Calendar',
+        href: '/calendar',
+        icon: Calendar,
+    },
+    {
+        title: 'Themer Dashboard',
+        href: '/themer-dashboard',
         icon: Palette,
     },
 ];
@@ -65,7 +94,6 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain items={mainNavItems} />
-                <ThemeSwitcherSidebar />
             </SidebarContent>
 
             <SidebarFooter>

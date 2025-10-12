@@ -1,3 +1,8 @@
+// Re-export all types from separate files
+export * from './entities';
+export * from './ui';
+
+// Keep existing Laravel/Inertia types for backward compatibility
 import { InertiaLinkProps } from '@inertiajs/react';
 import { LucideIcon } from 'lucide-react';
 
@@ -13,32 +18,6 @@ export interface BreadcrumbItem {
 export interface NavGroup {
     title: string;
     items: NavItem[];
-}
-
-export interface PetItem {
-    name: string;
-    age: number;
-}
-
-export interface Tag {
-    id: number;
-    name: string;
-    description?: string;
-    pivot?: {
-        kinds: string[] | null;
-    };
-}
-
-export interface Pet {
-    id: number;
-    name: string;
-    age: number;
-    species?: string;
-    tags: Tag[];
-}
-
-export interface PetStorePageProps {
-    pets: Pet[];
 }
 
 export interface NavItem {

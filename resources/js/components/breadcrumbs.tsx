@@ -12,16 +12,21 @@ import { Fragment } from 'react';
 
 export function Breadcrumbs({
     breadcrumbs,
+    items,
 }: {
-    breadcrumbs: BreadcrumbItemType[];
+    breadcrumbs?: BreadcrumbItemType[];
+    items?: BreadcrumbItemType[];
 }) {
+    // Support both breadcrumbs and items props for backward compatibility
+    const breadcrumbItems = breadcrumbs || items || [];
+
     return (
         <>
-            {breadcrumbs.length > 0 && (
+            {breadcrumbItems.length > 0 && (
                 <Breadcrumb>
                     <BreadcrumbList>
-                        {breadcrumbs.map((item, index) => {
-                            const isLast = index === breadcrumbs.length - 1;
+                        {breadcrumbItems.map((item, index) => {
+                            const isLast = index === breadcrumbItems.length - 1;
                             return (
                                 <Fragment key={index}>
                                     <BreadcrumbItem>
@@ -47,3 +52,6 @@ export function Breadcrumbs({
         </>
     );
 }
+
+// Export the type for use in pages
+export type { BreadcrumbItem } from '@/types';

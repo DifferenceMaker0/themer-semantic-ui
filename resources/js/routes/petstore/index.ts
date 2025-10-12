@@ -595,3 +595,14 @@ destroy.delete = (args: { petstore: string | number } | [petstore: string | numb
         })
     
     destroy.form = destroyForm
+const petstore = {
+    index: Object.assign(index, index),
+store: Object.assign(store, store),
+create: Object.assign(create, create),
+show: Object.assign(show, show),
+edit: Object.assign(edit, edit),
+update: Object.assign(update, update),
+destroy: Object.assign(destroy, destroy),
+}
+
+export default petstore
