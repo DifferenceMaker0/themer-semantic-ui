@@ -1,0 +1,231 @@
+@use "sass:map";
+@use "sass:color";
+@use "sass:math";
+
+/**
+ * Themer Utilities
+ * Copyright 2026 DocuDom, Inc. All rights reserved.
+ * Author: Collab Studio Online
+ * License: MIT
+ * Version: 1.0.0
+ * Description: Utility functions and helpers for the Themer system.
+ */ 
+
+// ===== UTILITY FUNCTIONS =====
+
+/**
+ * Utility function to apply a variable and use it immediately.
+ * Useful for styling a component itself.
+ * @param {String} $property - The CSS variable name
+ * @param {String} $css-property - The CSS property to apply it to (defaults to $property)
+ */
+@mixin use-themed-property($property, $css-property: $property) {
+  #{$css-property}: var(#{$property});
+}
+
+/**
+ * Core utility function to handle a single theme variable
+ * @param {String} $property - The name of the CSS variable
+ * @param {String} $light-value - The default (light mode) value
+ * @param {String} $dark-value - The dark mode value
+ */
+@mixin _apply-single-theme-variable($property, $light-value, $dark-value) {
+  #{$property}: $light-value;
+
+  // Scopes the dark value override to the .dark class
+  .dark & {
+    #{$property}: $dark-value;
+  }
+}
+
+/**
+ * Main utility function to apply multiple themed variables using a single Sass map.
+ * @param {Map} $theme-map - A map of CSS variable names and their light/dark values
+ */
+@mixin apply-theme-map($theme-map) {
+  // 1. Light Mode Defaults (Applied to the current selector, e.g., :root)
+  @each $variable-name, $modes in $theme-map {
+    @if map.has-key($modes, 'light') {
+      #{$variable-name}: map.get($modes, 'light');
+    }
+  } 
+  [data-color-scheme-mode=dark] { 
+    @each $variable-name, $modes in $theme-map {
+      @if map.has-key($modes, 'dark') {
+        #{$variable-name}: map.get($modes, 'dark');
+      }
+    }
+  }
+}
+
+/**
+ * Utility function to iterate over a map and output all key-value pairs 
+ * as CSS variable declarations.
+ * @param {Map} $var-map - A map of CSS variable names and their values.
+ */
+@mixin output-variables($var-map) {
+  @each $variable-name, $value in $var-map {
+    #{$variable-name}: $value;
+  }
+}
+
+// ===== RESPONSIVE UTILITIES =====
+
+// Breakpoint configuration
+$breakpoints: (
+  'sm': 768px,
+  'md': 992px,
+  'lg': 1200px,
+  'xl': 1400px,
+) !default;
+
+/**
+ * Media query utility for max-width breakpoints
+ * @param {String} $size - The breakpoint key (sm, md, lg, xl)
+ */
+@mixin media-max($size) {
+  $breakpoint-value: map.get($breakpoints, $size);
+
+  @if not $breakpoint-value {
+    @error "Unknown breakpoint '#{$size}'. Available breakpoints are: #{map.keys($breakpoints)}.";
+  }
+
+  @media only screen and (max-width: $breakpoint-value) {
+    @content;
+  }
+}
+
+/**
+ * Media query utility for min-width breakpoints
+ * @param {String} $size - The breakpoint key (sm, md, lg, xl)
+ */
+@mixin media-min($size) {
+  $breakpoint-value: map.get($breakpoints, $size);
+
+  @if not $breakpoint-value {
+    @error "Unknown breakpoint '#{$size}'. Available breakpoints are: #{map.keys($breakpoints)}.";
+  }
+
+  @media only screen and (min-width: $breakpoint-value) {
+    @content;
+  }
+}
+
+/**
+ * Media query utility for range breakpoints
+ * @param {String} $min-size - The minimum breakpoint key
+ * @param {String} $max-size - The maximum breakpoint key
+ */
+@mixin media-between($min-size, $max-size) {
+  $min-value: map.get($breakpoints, $min-size);
+  $max-value: map.get($breakpoints, $max-size);
+
+  @if not $min-value {
+    @error "Unknown min breakpoint '#{$min-size}'. Available breakpoints are: #{map.keys($breakpoints)}.";
+  }
+  @if not $max-value {
+    @error "Unknown max breakpoint '#{$max-size}'. Available breakpoints are: #{map.keys($breakpoints)}.";
+  }
+
+  @media only screen and (min-width: $min-value) and (max-width: $max-value) {
+    @content;
+  }
+}
+
+// ===== HELPER UTILITIES =====
+
+/**
+ * Utility to generate responsive classes
+ * @param {String} $property - The CSS property name
+ * @param {Map} $values - Map of class suffixes to values
+ * @param {List} $breakpoints - List of breakpoint names to generate for
+ */
+@mixin generate-responsive-classes($property, $values, $breakpoints: ('sm', 'md', 'lg')) {
+  // Handle special cases for property names
+  $css-property: $property;
+  @if $property == 'grid-cols' {
+    $css-property: 'grid-template-columns';
+  } @else if $property == 'flex' {
+    $css-property: 'flex-direction';
+  } @else if $property == 'justify' {
+    $css-property: 'justify-content';
+  } @else if $property == 'items' {
+    $css-property: 'align-items';
+  } @else if $property == 'text' {
+    $css-property: 'font-size';
+  } @else if $property == 'w' {
+    $css-property: 'width';
+  }
+
+  // Base classes (no breakpoint prefix)
+  @each $suffix, $value in $values {
+    .#{$property}-#{$suffix} {
+      @if $property == 'grid-cols' {
+        display: grid;
+        grid-template-columns: $value;
+      } @else if $property == 'flex' and $suffix == 'wrap' {
+        flex-wrap: $value;
+      } @else if $property == 'flex' and $suffix == 'nowrap' {
+        flex-wrap: $value;
+      } @else if $property == 'flex' {
+        display: flex;
+        flex-direction: $value;
+      } @else {
+        #{$css-property}: $value;
+      }
+    }
+  }
+
+  // Responsive classes
+  @each $breakpoint in $breakpoints {
+    @include media-min($breakpoint) {
+      @each $suffix, $value in $values {
+        .#{$breakpoint}\:#{$property}-#{$suffix} {
+          @if $property == 'grid-cols' {
+            display: grid;
+            grid-template-columns: $value;
+          } @else if $property == 'flex' and $suffix == 'wrap' {
+            flex-wrap: $value;
+          } @else if $property == 'flex' and $suffix == 'nowrap' {
+            flex-wrap: $value;
+          } @else if $property == 'flex' {
+            display: flex;
+            flex-direction: $value;
+          } @else {
+            #{$css-property}: $value;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Utility to create spacing classes (margin, padding)
+ * @param {String} $type - 'm' for margin, 'p' for padding
+ * @param {Map} $scale - Map of size names to values
+ */
+@mixin generate-spacing-classes($type, $scale) {
+  $property: if($type == 'm', 'margin', 'padding');
+  
+  @each $size, $value in $scale {
+    // All sides
+    .#{$type}-#{$size} { #{$property}: $value; }
+    
+    // Individual sides
+    .#{$type}t-#{$size} { #{$property}-top: $value; }
+    .#{$type}r-#{$size} { #{$property}-right: $value; }
+    .#{$type}b-#{$size} { #{$property}-bottom: $value; }
+    .#{$type}l-#{$size} { #{$property}-left: $value; }
+    
+    // Axes
+    .#{$type}x-#{$size} { 
+      #{$property}-left: $value; 
+      #{$property}-right: $value; 
+    }
+    .#{$type}y-#{$size} { 
+      #{$property}-top: $value; 
+      #{$property}-bottom: $value; 
+    }
+  }
+}

@@ -1,0 +1,17 @@
+emit:
+  - "@typespec/openapi3"
+  - "@typespec/http-client-js"
+  - "@typespec/http-server-js"
+  - "@typespec/json-schema"  
+parameters:
+  base-dir:
+    default: "{cwd}" 
+options:
+  "@typespec/openapi3":
+    emitter-output-dir: "{base-dir}/dist/tsp-output/schema"
+    openapi-versions:
+      - 3.1.0
+  "@typespec/http-client-js":
+    emitter-output-dir: "{base-dir}/dist/tsp-output/clients/js"
+  "@typespec/http-server-js":
+    emitter-output-dir: "{base-dir}/dist/tsp-output/server/js"

@@ -1,0 +1,155 @@
+@use "_utils" as utils;
+
+/**
+ * Themer Component Mixins
+ * Copyright 2026 DocuDom, Inc. All rights reserved.
+ * Author: Collab Studio Online
+ * License: MIT
+ * Version: 1.0.0
+ * Description: Reusable component mixins for the Themer system.
+ */
+
+// ===== COMPONENT MIXINS =====
+
+/**
+ * Thematic button component mixin
+ * Creates a button that responds to theme changes
+ */
+@mixin thematic-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+
+  // Use themed variables for colors
+  background-color: var(--color-accent-1);
+  color: var(--color-background);
+  border: 2px solid var(--color-border);
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: var(--color-shadow);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+/**
+ * Card component mixin
+ * Creates a themed card container
+ */
+@mixin thematic-card {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  box-shadow: var(--color-shadow);
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--color-shadow);
+    transform: translateY(-2px);
+  }
+}
+
+/**
+ * Input component mixin
+ * Creates themed form inputs
+ */
+@mixin thematic-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-border-input);
+  border-radius: 0.375rem;
+  background-color: var(--background-secondary);
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent-1);
+    box-shadow: 0 0 0 3px rgba(var(--color-accent-1), 0.1);
+  }
+
+  &::placeholder {
+    color: var(--color-text);
+    opacity: 0.6;
+  }
+}
+
+/**
+ * Responsive container mixin
+ * Creates a responsive container with theme-aware styling
+ */
+@mixin responsive-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @include utils.media-min('sm') {
+    padding: 0 1.5rem;
+  }
+
+  @include utils.media-min('md') {
+    padding: 0 2rem;
+  }
+
+  @include utils.media-min('lg') {
+    padding: 0 2.5rem;
+  }
+}
+
+/**
+ * Responsive grid mixin
+ * Creates responsive grid layouts
+ * @param {Number} $cols-mobile - Columns on mobile (default: 1)
+ * @param {Number} $cols-tablet - Columns on tablet (default: 2)
+ * @param {Number} $cols-desktop - Columns on desktop (default: 3)
+ */
+@mixin responsive-grid($cols-mobile: 1, $cols-tablet: 2, $cols-desktop: 3) {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat($cols-mobile, 1fr);
+
+  @include utils.media-min('sm') {
+    grid-template-columns: repeat($cols-tablet, 1fr);
+  }
+
+  @include utils.media-min('lg') {
+    grid-template-columns: repeat($cols-desktop, 1fr);
+  }
+}
+
+/**
+ * Responsive text mixin
+ * Creates responsive typography
+ * @param {String} $size-mobile - Mobile font size
+ * @param {String} $size-desktop - Desktop font size
+ */
+@mixin responsive-text($size-mobile, $size-desktop) {
+  font-size: $size-mobile;
+  line-height: 1.4;
+
+  @include utils.media-min('md') {
+    font-size: $size-desktop;
+    line-height: 1.5;
+  }
+}

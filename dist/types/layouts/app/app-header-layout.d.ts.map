@@ -1,0 +1,1 @@
+{"version":3,"file":"app-header-layout.d.ts","sourceRoot":"","sources":["../../../../resources/js/layouts/app/app-header-layout.tsx"],"names":[],"mappings":"AAGA,OAAO,EAAE,KAAK,cAAc,EAAE,MAAM,SAAS,CAAC;AAC9C,OAAO,KAAK,EAAE,iBAAiB,EAAE,MAAM,OAAO,CAAC;AAE/C,MAAM,CAAC,OAAO,UAAU,eAAe,CAAC,EACpC,QAAQ,EACR,WAAW,GACd,EAAE,iBAAiB,CAAC;IAAE,WAAW,CAAC,EAAE,cAAc,EAAE,CAAA;CAAE,CAAC,2CAOvD"}

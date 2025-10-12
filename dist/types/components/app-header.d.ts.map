@@ -1,0 +1,1 @@
+{"version":3,"file":"app-header.d.ts","sourceRoot":"","sources":["../../../resources/js/components/app-header.tsx"],"names":[],"mappings":"AAgCA,OAAO,EAAE,KAAK,cAAc,EAAiC,MAAM,SAAS,CAAC;AA8B7E,UAAU,cAAc;IACpB,WAAW,CAAC,EAAE,cAAc,EAAE,CAAC;CAClC;AAED,wBAAgB,SAAS,CAAC,EAAE,WAAgB,EAAE,EAAE,cAAc,2CA+M7D"}

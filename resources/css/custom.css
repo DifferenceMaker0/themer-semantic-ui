@@ -1,0 +1,87 @@
+@import "@radix-ui/colors/crimson.css";  
+@import "@radix-ui/colors/violet.css";
+@import "@radix-ui/colors/mauve.css"; 
+@import "@radix-ui/colors/mint.css";
+
+.radix-themes {
+	--cursor-button: pointer;
+	--cursor-checkbox: pointer;
+	--cursor-disabled: default;
+	--cursor-link: pointer;
+	--cursor-menu-item: pointer;
+	--cursor-radio: pointer;
+	--cursor-slider-thumb: grab;
+	--cursor-slider-thumb-active: grabbing;
+	--cursor-switch: pointer;
+}
+.shadow-1{box-shadow: var(--shadow-1);}
+.shadow-2{box-shadow: var(--shadow-2);}
+.shadow-3{box-shadow: var(--shadow-3);}
+.shadow-4{box-shadow: var(--shadow-4);}
+.shadow-5{box-shadow: var(--shadow-5);}
+.shadow-6{box-shadow: var(--shadow-6);} 
+
+/* input{
+    cursor:var(--cursor-button);
+    border: 1px solid var(--colors-mint-7);;
+    color: var(--crimson-9);
+    display:flex;
+    height:35px;
+    max-width:300px;
+    justify-content: center;
+    border-radius:5px; 
+    background-color: var(--color-stone-500);
+    padding:2.5px; 
+    font-size: 15px;
+    text-shadow: 1px -1px 1px var(--colors-crimson-9);
+    box-shadow: 1px 5px 5px 3px var(--colors-stone-500);
+}  */
+.FormLabel[data-invalid] {
+	color: red;
+}
+.FormLabel[data-valid] {
+	color: green;
+}
+hr{
+    display:inline-block;
+    position: relative;
+    height:2px;
+    border:1px solid mediumaquamarine;
+    border-radius:20%;
+    width:30%;
+    color: var(--crimson-9);
+}
+article{ 
+    border: 1px solid var(--crimson-9); 
+    box-shadow: var(--shadow-6);
+    border-radius:6px;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding:20px 30px;
+}
+.PopoverTrigger {
+	background-color: var(--crimson-9);
+	border-radius: 4px;
+} 
+.PopoverContent {
+	border-radius: 4px;
+	padding: 20px;
+	width: 260px;
+	background-color: var(--color-green-200);
+} 
+.PopoverArrow {
+	fill: var(--color-green-300);
+}
+
+
+.cls-1 {
+fill: none;
+}
+
+.cls-2 {
+clip-path: url(#clippath);
+}

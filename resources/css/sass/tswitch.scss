@@ -1,0 +1,237 @@
+@use "sass:math";
+@use "_vars";
+@use "_mixins" as mixins;
+@use "_utils" as utils;
+
+$widget-padding: 1.25rem;
+$widget-border-radius: 0.5rem;
+$widget-font-size: 1rem;
+$gap-spacing: 0.75rem;
+
+.theme-switcher-widget {
+  // Use CSS variables for theme-aware styling
+  // These variables are controlled by your [data-color-scheme-mode] in _vars.css
+  background-color: var(--color-background); 
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--color-shadow);
+
+  // Layout using Flexbox for a clean, horizontal or vertical arrangement
+  display: flex;
+  flex-direction: column;
+  gap: $gap-spacing;
+  padding: $widget-padding;
+  border-radius: $widget-border-radius;
+  max-width: 300px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: $widget-font-size;
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    display: block; // Ensures it takes up full width above the select
+  }
+
+  // 2. Styling the Core Element: The Select Dropdown
+  select {
+    // Inherit text color, but apply a nice background and accent border
+    color: inherit; 
+    background-color: var(--background-secondary);
+    border: 2px solid var(--color-border-input);
+    padding: 0.6rem 1rem;
+    border-radius: 0.35rem;
+    appearance: none; // Remove default browser styling
+    cursor: pointer;
+    font-size: $widget-font-size;
+    line-height: 1.5;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    // Focus state (Crucial for accessibility)
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent-1); // Use your primary accent color!
+      box-shadow: var(--color-accent-1);
+    }
+  }
+
+  // 3. Styling the Current Mode Display
+  .current-mode-display {
+    margin: 0;
+    padding-top: math.div($gap-spacing, 2);
+    border-top: 1px dashed var(--color-border-light);
+    font-size: 0.9em;
+
+    strong {
+      // Highlight the current mode using the theme's primary accent color
+      // color: var(--color-accent-text, var(--color-accent-1));
+      color: var(--color-accent-1);
+      text-transform: capitalize;
+    }
+  }
+
+  // 4. Sass Nesting for Dark/Light Mode adjustments (Optional, but useful!)
+  // This shows how the widget can react to a specific mode if needed.
+  @at-root body[data-color-scheme-mode="dark"] & {
+    box-shadow: var(--color-shadow);
+
+    select {
+      background-color: var(--background-secondary);
+      border-color: var(--color-border-input);
+    }
+  }
+}
+
+.themer-button {
+  @include mixins.thematic-button;
+}
+
+.themer-responsive {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 0; 
+  @include utils.media-max(md) {
+    flex-direction: row;
+    margin: 0 auto;
+  }
+  @include utils.media-max(lg) {
+    flex-direction: row;
+    margin: 0 auto;
+  }
+}
+
+// ===== RESPONSIVE LAYOUT CLASSES =====
+
+// Generate responsive grid classes
+@include utils.generate-responsive-classes('grid-cols', (
+  '1': repeat(1, 1fr),
+  '2': repeat(2, 1fr),
+  '3': repeat(3, 1fr),
+  '4': repeat(4, 1fr),
+  '6': repeat(6, 1fr),
+  '12': repeat(12, 1fr)
+));
+
+// Generate responsive spacing classes
+$spacing-scale: (
+  '0': 0,
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '3': 0.75rem,
+  '4': 1rem,
+  '5': 1.25rem,
+  '6': 1.5rem,
+  '8': 2rem,
+  '10': 2.5rem,
+  '12': 3rem,
+  '16': 4rem,
+  '20': 5rem,
+  '24': 6rem
+);
+
+@include utils.generate-spacing-classes('m', $spacing-scale);
+@include utils.generate-spacing-classes('p', $spacing-scale);
+
+// Generate responsive text size classes
+@include utils.generate-responsive-classes('text', (
+  'xs': 0.75rem,
+  'sm': 0.875rem,
+  'base': 1rem,
+  'lg': 1.125rem,
+  'xl': 1.25rem,
+  '2xl': 1.5rem,
+  '3xl': 1.875rem,
+  '4xl': 2.25rem
+));
+
+// Generate responsive width classes
+@include utils.generate-responsive-classes('w', (
+  'auto': auto,
+  'full': 100%,
+  'half': math.div(100%, 2),
+  'third': math.div(100%, 3),
+  'two-thirds': math.div(200%, 3),
+  'quarter': math.div(100%, 4),
+  'three-quarters': math.div(300%, 4),
+  'fifth': math.div(100%, 5),
+  'two-fifths': math.div(200%, 5),
+  'three-fifths': math.div(300%, 5),
+  'four-fifths': math.div(400%, 5)
+));
+
+// Generate responsive flex classes
+@include utils.generate-responsive-classes('flex', (
+  'row': row,
+  'col': column,
+  'wrap': wrap,
+  'nowrap': nowrap
+));
+
+// Generate responsive justify classes
+@include utils.generate-responsive-classes('justify', (
+  'start': flex-start,
+  'end': flex-end,
+  'center': center,
+  'between': space-between,
+  'around': space-around,
+  'evenly': space-evenly
+));
+
+// Generate responsive align classes
+@include utils.generate-responsive-classes('items', (
+  'start': flex-start,
+  'end': flex-end,
+  'center': center,
+  'baseline': baseline,
+  'stretch': stretch
+));
+
+// ===== THEMER COMPONENT CLASSES =====
+
+// Themer card component
+.themer-card {
+  @include mixins.thematic-card;
+}
+
+// Themer input component
+.themer-input {
+  @include mixins.thematic-input;
+}
+
+// Responsive container
+.themer-container {
+  @include mixins.responsive-container;
+}
+
+// Responsive grid layouts
+.themer-grid-1 {
+  @include mixins.responsive-grid(1, 1, 1);
+}
+
+.themer-grid-2 {
+  @include mixins.responsive-grid(1, 2, 2);
+}
+
+.themer-grid-3 {
+  @include mixins.responsive-grid(1, 2, 3);
+}
+
+.themer-grid-4 {
+  @include mixins.responsive-grid(1, 2, 4);
+}
+
+// Responsive text classes
+.themer-text-responsive {
+  @include mixins.responsive-text(1rem, 1.125rem);
+}
+
+.themer-heading-responsive {
+  @include mixins.responsive-text(1.5rem, 2rem);
+}
+
+.themer-title-responsive {
+  @include mixins.responsive-text(2rem, 2.5rem);
+}

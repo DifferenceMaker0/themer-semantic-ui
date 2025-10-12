@@ -1,0 +1,16 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": [
+        "./dist/tsp-output/clients/js/src/index.ts",
+        "./dist/tsp-output/clients/js/src/models/index.ts",
+        "./dist/tsp-output/server/js/src/generated/models/all/pet-store/index.ts",
+        "./resources/js/app.tsx"
+    ],
+    "out": "./dist/docs",
+    "basePath": "/docs/",  // The prefix links will be generated with
+    "projectDocuments": [
+        "./src/docs/typescript.md",
+        "./src/docs/typespec.md",
+        "./src/docs/typedoc.md"
+    ]
+}

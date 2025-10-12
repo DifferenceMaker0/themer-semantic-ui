@@ -1,0 +1,95 @@
+@use '_utils' as utils;
+
+// 1. Define the master map of all themed variables
+$color-themes: (
+  // Key: CSS Variable Name 
+  // Value: Map of light/dark values 
+  --color-background: (
+    light: oklch(1 0 0), 
+    dark: oklch(0.145 0 0)
+  ),
+  --color-text: (
+    light: var(--color-crimson-9), 
+    dark: var(--color-mint-8)
+  ),
+  --color-accent-primary: (
+    light: #007bff,
+    dark: #409eff
+  ),
+  --color-border: (
+    light: #cccccc,
+    dark: #444444
+  ), 
+  --background-secondary: (
+    light: var(--color-slate-3),
+    dark: var(--color-slate-11)
+  ),
+  --color-border-input: (
+    light: var(--color-mint-8),
+    dark: var(--color-crimson-9)
+  ),
+  --color-accent-1: (
+    light: var(--color-crimson-9),
+    dark: var(--color-mint-8)
+  ),
+  --color-border-light: (
+    light: var(--color-crimson-9),
+    dark: var(--color-mint-8)
+  ),
+  --color-shadow: (
+    light: var(--box-shadow-1),
+    dark: var(--box-shadow-6)
+  ), 
+); 
+
+// 2. Apply the batch mixin at the root level
+:root {
+  @include utils.apply-theme-map($color-themes);
+  --box-shadow-1: 0px 0px 0px 1px rgba(0, 9, 50, 0.12),
+    0px 1.5px 2px 0px rgba(0, 0, 85, 0.02),
+    0px 1.5px 2px 0px rgba(0, 0, 0, 0.1);
+  --box-shadow-6: 3px 3px 5px 6px #ccc; 
+  --shadows-shadow-1-box-shadow: inset 0px 0px 0px 1px rgba(0, 9, 50, 0.12),
+    inset 0px 1.5px 2px 0px rgba(0, 0, 85, 0.02),
+    inset 0px 1.5px 2px 0px rgba(0, 0, 0, 0.1);
+    --shadows-shadow-6-box-shadow: 0px 0px 0px 1px rgba(0, 0, 51, 0.06),
+    0px 12px 60px 0px rgba(0, 0, 0, 0.15),
+    0px 16px 64px 0px rgba(0, 0, 85, 0.02),
+    0px 16px 36px -20px rgba(0, 6, 46, 0.2);
+    --color-crimson-1: #fffcfd;
+  --color-crimson-2: #fef7f9;
+  --color-crimson-3: #ffe9f0;
+  --color-crimson-4: #fedce7;
+  --color-crimson-5: #facedd;
+  --color-crimson-6: #f3bed1;
+  --color-crimson-7: #eaacc3;
+  --color-crimson-8: #e093b2;
+  --color-crimson-9: #e93d82;
+  --color-crimson-10: #df3478;
+  --color-crimson-11: #cb1d63;
+  --color-crimson-12: #621639;
+  --color-mint-1: #f9fefd;
+  --color-mint-2: #f2fbf9;
+  --color-mint-3: #ddf9f2;
+  --color-mint-4: #c8f4e9;
+  --color-mint-5: #b3ecde;
+  --color-mint-6: #9ce0d0;
+  --color-mint-7: #7ecfbd;
+  --color-mint-8: #4cbba5;
+  --color-mint-9: #86ead4;
+  --color-mint-10: #7de0cb;
+  --color-mint-11: #027864;
+  --color-mint-12: #16433c;
+  --color-slate-1: #fcfcfd;
+  --color-slate-2: #f9f9fb;
+  --color-slate-3: #f0f0f3;
+  --color-slate-4: #e8e8ec;
+  --color-slate-5: #e0e1e6;
+  --color-slate-6: #d9d9e0;
+  --color-slate-7: #cdced6;
+  --color-slate-8: #b9bbc6;
+  --color-slate-9: #8b8d98;
+  --color-slate-10: #80838d;
+  --color-slate-11: #60646c;
+  --color-slate-12: #1c2024;
+}
