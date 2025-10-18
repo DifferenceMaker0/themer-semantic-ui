@@ -134,7 +134,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::show
- * @see app/Http/Controllers/SocialMediaPostController.php:64
+ * @see app/Http/Controllers/SocialMediaPostController.php:75
  * @route '/api/social-media-posts/{social_media_post}'
  */
 export const show = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -149,7 +149,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::show
- * @see app/Http/Controllers/SocialMediaPostController.php:64
+ * @see app/Http/Controllers/SocialMediaPostController.php:75
  * @route '/api/social-media-posts/{social_media_post}'
  */
 show.url = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -177,7 +177,7 @@ show.url = (args: { social_media_post: string | number } | [social_media_post: s
 
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::show
- * @see app/Http/Controllers/SocialMediaPostController.php:64
+ * @see app/Http/Controllers/SocialMediaPostController.php:75
  * @route '/api/social-media-posts/{social_media_post}'
  */
 show.get = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -186,7 +186,7 @@ show.get = (args: { social_media_post: string | number } | [social_media_post: s
 })
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::show
- * @see app/Http/Controllers/SocialMediaPostController.php:64
+ * @see app/Http/Controllers/SocialMediaPostController.php:75
  * @route '/api/social-media-posts/{social_media_post}'
  */
 show.head = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -196,7 +196,7 @@ show.head = (args: { social_media_post: string | number } | [social_media_post: 
 
     /**
 * @see \App\Http\Controllers\SocialMediaPostController::show
- * @see app/Http/Controllers/SocialMediaPostController.php:64
+ * @see app/Http/Controllers/SocialMediaPostController.php:75
  * @route '/api/social-media-posts/{social_media_post}'
  */
     const showForm = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -206,7 +206,7 @@ show.head = (args: { social_media_post: string | number } | [social_media_post: 
 
             /**
 * @see \App\Http\Controllers\SocialMediaPostController::show
- * @see app/Http/Controllers/SocialMediaPostController.php:64
+ * @see app/Http/Controllers/SocialMediaPostController.php:75
  * @route '/api/social-media-posts/{social_media_post}'
  */
         showForm.get = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -215,7 +215,7 @@ show.head = (args: { social_media_post: string | number } | [social_media_post: 
         })
             /**
 * @see \App\Http\Controllers\SocialMediaPostController::show
- * @see app/Http/Controllers/SocialMediaPostController.php:64
+ * @see app/Http/Controllers/SocialMediaPostController.php:75
  * @route '/api/social-media-posts/{social_media_post}'
  */
         showForm.head = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -231,7 +231,7 @@ show.head = (args: { social_media_post: string | number } | [social_media_post: 
     show.form = showForm
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::update
- * @see app/Http/Controllers/SocialMediaPostController.php:84
+ * @see app/Http/Controllers/SocialMediaPostController.php:95
  * @route '/api/social-media-posts/{social_media_post}'
  */
 export const update = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -246,7 +246,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::update
- * @see app/Http/Controllers/SocialMediaPostController.php:84
+ * @see app/Http/Controllers/SocialMediaPostController.php:95
  * @route '/api/social-media-posts/{social_media_post}'
  */
 update.url = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -274,7 +274,7 @@ update.url = (args: { social_media_post: string | number } | [social_media_post:
 
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::update
- * @see app/Http/Controllers/SocialMediaPostController.php:84
+ * @see app/Http/Controllers/SocialMediaPostController.php:95
  * @route '/api/social-media-posts/{social_media_post}'
  */
 update.put = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -283,7 +283,7 @@ update.put = (args: { social_media_post: string | number } | [social_media_post:
 })
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::update
- * @see app/Http/Controllers/SocialMediaPostController.php:84
+ * @see app/Http/Controllers/SocialMediaPostController.php:95
  * @route '/api/social-media-posts/{social_media_post}'
  */
 update.patch = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -293,7 +293,7 @@ update.patch = (args: { social_media_post: string | number } | [social_media_pos
 
     /**
 * @see \App\Http\Controllers\SocialMediaPostController::update
- * @see app/Http/Controllers/SocialMediaPostController.php:84
+ * @see app/Http/Controllers/SocialMediaPostController.php:95
  * @route '/api/social-media-posts/{social_media_post}'
  */
     const updateForm = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -308,7 +308,7 @@ update.patch = (args: { social_media_post: string | number } | [social_media_pos
 
             /**
 * @see \App\Http\Controllers\SocialMediaPostController::update
- * @see app/Http/Controllers/SocialMediaPostController.php:84
+ * @see app/Http/Controllers/SocialMediaPostController.php:95
  * @route '/api/social-media-posts/{social_media_post}'
  */
         updateForm.put = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -322,7 +322,7 @@ update.patch = (args: { social_media_post: string | number } | [social_media_pos
         })
             /**
 * @see \App\Http\Controllers\SocialMediaPostController::update
- * @see app/Http/Controllers/SocialMediaPostController.php:84
+ * @see app/Http/Controllers/SocialMediaPostController.php:95
  * @route '/api/social-media-posts/{social_media_post}'
  */
         updateForm.patch = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -338,7 +338,7 @@ update.patch = (args: { social_media_post: string | number } | [social_media_pos
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::destroy
- * @see app/Http/Controllers/SocialMediaPostController.php:124
+ * @see app/Http/Controllers/SocialMediaPostController.php:135
  * @route '/api/social-media-posts/{social_media_post}'
  */
 export const destroy = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -353,7 +353,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::destroy
- * @see app/Http/Controllers/SocialMediaPostController.php:124
+ * @see app/Http/Controllers/SocialMediaPostController.php:135
  * @route '/api/social-media-posts/{social_media_post}'
  */
 destroy.url = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -381,7 +381,7 @@ destroy.url = (args: { social_media_post: string | number } | [social_media_post
 
 /**
 * @see \App\Http\Controllers\SocialMediaPostController::destroy
- * @see app/Http/Controllers/SocialMediaPostController.php:124
+ * @see app/Http/Controllers/SocialMediaPostController.php:135
  * @route '/api/social-media-posts/{social_media_post}'
  */
 destroy.delete = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -391,7 +391,7 @@ destroy.delete = (args: { social_media_post: string | number } | [social_media_p
 
     /**
 * @see \App\Http\Controllers\SocialMediaPostController::destroy
- * @see app/Http/Controllers/SocialMediaPostController.php:124
+ * @see app/Http/Controllers/SocialMediaPostController.php:135
  * @route '/api/social-media-posts/{social_media_post}'
  */
     const destroyForm = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -406,7 +406,7 @@ destroy.delete = (args: { social_media_post: string | number } | [social_media_p
 
             /**
 * @see \App\Http\Controllers\SocialMediaPostController::destroy
- * @see app/Http/Controllers/SocialMediaPostController.php:124
+ * @see app/Http/Controllers/SocialMediaPostController.php:135
  * @route '/api/social-media-posts/{social_media_post}'
  */
         destroyForm.delete = (args: { social_media_post: string | number } | [social_media_post: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

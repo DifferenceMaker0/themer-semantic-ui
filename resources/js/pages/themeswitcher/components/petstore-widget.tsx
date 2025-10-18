@@ -32,7 +32,10 @@ const fetchPets = async (): Promise<Pet[]> => {
 const createPet = async (petData: { name: string; age: number; species?: string }): Promise<Pet> => {
     const response = await fetch(API_BASE, {
         method: 'POST',
-        headers: createCSRFHeaders() as HeadersInit,
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
         credentials: 'same-origin',
         body: JSON.stringify(petData)
     });
