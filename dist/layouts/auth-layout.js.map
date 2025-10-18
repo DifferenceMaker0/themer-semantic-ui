@@ -1,1 +1,0 @@
-{"version":3,"file":"auth-layout.js","sourceRoot":"","sources":["../../resources/js/layouts/auth-layout.tsx"],"names":[],"mappings":";AAAA,OAAO,kBAAkB,MAAM,mCAAmC,CAAC;AAEnE,MAAM,CAAC,OAAO,UAAU,UAAU,CAAC,EAC/B,QAAQ,EACR,KAAK,EACL,WAAW,EACX,GAAG,KAAK,EAKX;IACG,OAAO,CACH,KAAC,kBAAkB,IAAC,KAAK,EAAE,KAAK,EAAE,WAAW,EAAE,WAAW,KAAM,KAAK,YAChE,QAAQ,GACQ,CACxB,CAAC;AACN,CAAC"}

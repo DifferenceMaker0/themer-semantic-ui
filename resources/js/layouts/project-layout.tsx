@@ -44,9 +44,8 @@ interface NavigationItem {
     icon: React.ComponentType<{ className?: string }>;
 }
 
-const navigationItems: NavigationItem[] = [
-    { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { title: "Project Dashboard", href: "/project-dashboard", icon: Monitor },
+const navigationItems: NavigationItem[] = [ 
+    { title: "Dashboard", href: "/studio-manager", icon: LayoutDashboard },
     { title: "Projects", href: "/projects", icon: FolderOpen },
     { title: "Tasks", href: "/tasks", icon: CheckSquare },
     { title: "Clients", href: "/clients", icon: Users },

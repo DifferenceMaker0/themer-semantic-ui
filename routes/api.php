@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TimeEntryController;
 
 Route::prefix('petstore')->group(function () {
     // GET /api/petstore - Index (List all pets)
@@ -40,4 +43,22 @@ Route::middleware('auth:sanctum')->group(function () {
     // Client Management
     Route::apiResource('clients', ClientController::class);
     Route::get('clients-stats', [ClientController::class, 'stats']);
+
+    // Project Management
+    Route::apiResource('projects', ProjectController::class);
+    Route::get('projects-stats', [ProjectController::class, 'stats']);
+    Route::post('projects/{project}/analyze', [ProjectController::class, 'analyze']);
+
+    // Task Management
+    Route::apiResource('tasks', TaskController::class);
+    Route::get('tasks-stats', [TaskController::class, 'stats']);
+    Route::post('tasks/update-order', [TaskController::class, 'updateOrder']);
+
+    // Time Entry Management
+    Route::apiResource('time-entries', TimeEntryController::class);
+    Route::get('time-entries-stats', [TimeEntryController::class, 'stats']);
+    Route::post('time-entries/start', [TimeEntryController::class, 'start']);
+    Route::post('time-entries/{timeEntry}/stop', [TimeEntryController::class, 'stop']);
 });
+
+

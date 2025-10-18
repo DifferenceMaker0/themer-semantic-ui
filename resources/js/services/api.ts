@@ -1,17 +1,19 @@
 import axios, { AxiosResponse } from 'axios';
 import type { Client, Project, Task, TimeEntry } from '@/types';
 
-// Configure axios defaults
+// Configure axios defaults for Sanctum SPA authentication
 axios.defaults.baseURL = '/api';
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.withCredentials = true; // Important for Sanctum SPA authentication
 
-// Add request interceptor to include auth token
+// Add request interceptor to include CSRF token
 axios.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('auth_token') || document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        // Get CSRF token from meta tag
+        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers['X-CSRF-TOKEN'] = token;
         }
         return config;
     },
@@ -96,11 +98,22 @@ export class ClientService {
     }
 }
 
-// Project API Service (placeholder for future implementation)
+// Project API Service
 export class ProjectService {
     private static baseUrl = '/projects';
 
-    static async getAll(params?: any): Promise<PaginatedResponse<Project>> {
+    static async getAll(params?: {
+        page?: number;
+        per_page?: number;
+        search?: string;
+        status?: string;
+        priority?: string;
+        project_type?: string;
+        client_id?: string;
+        overdue?: boolean;
+        sort_by?: string;
+        sort_order?: 'asc' | 'desc';
+    }): Promise<PaginatedResponse<Project>> {
         const response: AxiosResponse<PaginatedResponse<Project>> = await axios.get(this.baseUrl, { params });
         return response.data;
     }
@@ -123,13 +136,52 @@ export class ProjectService {
     static async delete(id: string | number): Promise<void> {
         await axios.delete(`${this.baseUrl}/${id}`);
     }
+
+    static async getStats(): Promise<{
+        total_projects: number;
+        active_projects: number;
+        completed_projects: number;
+        overdue_projects: number;
+        total_budget: number;
+        average_completion: number;
+        projects_by_status: Record<string, number>;
+        projects_by_priority: Record<string, number>;
+    }> {
+        const response = await axios.get('/projects-stats');
+        return response.data.data;
+    }
+
+    static async analyze(id: string | number): Promise<{
+        predicted_risk: string;
+        risk_factors: string[];
+        suggested_buffer_hours: number;
+        suggested_deadline: string;
+        confidence_score: number;
+        market_insights: string;
+    }> {
+        const response = await axios.post(`${this.baseUrl}/${id}/analyze`);
+        return response.data.data;
+    }
 }
 
-// Task API Service (placeholder for future implementation)
+// Task API Service
 export class TaskService {
     private static baseUrl = '/tasks';
 
-    static async getAll(params?: any): Promise<PaginatedResponse<Task>> {
+    static async getAll(params?: {
+        page?: number;
+        per_page?: number;
+        search?: string;
+        status?: string;
+        priority?: string;
+        project_id?: string;
+        assignee?: string;
+        overdue?: boolean;
+        root_tasks_only?: boolean;
+        critical_path?: boolean;
+        sort_by?: string;
+        sort_order?: 'asc' | 'desc';
+    }): Promise<PaginatedResponse<Task>> {
         const response: AxiosResponse<PaginatedResponse<Task>> = await axios.get(this.baseUrl, { params });
         return response.data;
     }
@@ -152,13 +204,51 @@ export class TaskService {
     static async delete(id: string | number): Promise<void> {
         await axios.delete(`${this.baseUrl}/${id}`);
     }
+
+    static async getStats(): Promise<{
+        total_tasks: number;
+        completed_tasks: number;
+        in_progress_tasks: number;
+        overdue_tasks: number;
+        critical_path_tasks: number;
+        average_completion_time: number;
+        tasks_by_status: Record<string, number>;
+        tasks_by_priority: Record<string, number>;
+        tasks_by_project: Record<string, number>;
+    }> {
+        const response = await axios.get('/tasks-stats');
+        return response.data.data;
+    }
+
+    static async updateOrder(tasks: Array<{
+        id: string | number;
+        order_index: number;
+        status?: string;
+    }>): Promise<void> {
+        await axios.post('/tasks/update-order', { tasks });
+    }
 }
 
-// Time Entry API Service (placeholder for future implementation)
+// TimeEntry API Service
 export class TimeEntryService {
     private static baseUrl = '/time-entries';
 
-    static async getAll(params?: any): Promise<PaginatedResponse<TimeEntry>> {
+    static async getAll(params?: {
+        page?: number;
+        per_page?: number;
+        search?: string;
+        project_id?: string;
+        task_id?: string;
+        is_billable?: boolean;
+        date_from?: string;
+        date_to?: string;
+        today?: boolean;
+        this_week?: boolean;
+        this_month?: boolean;
+        running?: boolean;
+        sort_by?: string;
+        sort_order?: 'asc' | 'desc';
+    }): Promise<PaginatedResponse<TimeEntry>> {
         const response: AxiosResponse<PaginatedResponse<TimeEntry>> = await axios.get(this.baseUrl, { params });
         return response.data;
     }
@@ -180,6 +270,39 @@ export class TimeEntryService {
 
     static async delete(id: string | number): Promise<void> {
         await axios.delete(`${this.baseUrl}/${id}`);
+    }
+
+    static async getStats(): Promise<{
+        total_entries: number;
+        total_hours: number;
+        billable_hours: number;
+        non_billable_hours: number;
+        total_revenue: number;
+        today_hours: number;
+        this_week_hours: number;
+        this_month_hours: number;
+        running_entries: number;
+        hours_by_project: Record<string, number>;
+        revenue_by_project: Array<{ project: string; revenue: number }>;
+    }> {
+        const response = await axios.get('/time-entries-stats');
+        return response.data.data;
+    }
+
+    static async startTimer(data: {
+        project_id: string | number;
+        task_id?: string | number;
+        description: string;
+        is_billable?: boolean;
+        hourly_rate?: number;
+    }): Promise<TimeEntry> {
+        const response: AxiosResponse<ApiResponse<TimeEntry>> = await axios.post('/time-entries/start', data);
+        return response.data.data;
+    }
+
+    static async stopTimer(id: string | number): Promise<TimeEntry> {
+        const response: AxiosResponse<ApiResponse<TimeEntry>> = await axios.post(`${this.baseUrl}/${id}/stop`);
+        return response.data.data;
     }
 }
 

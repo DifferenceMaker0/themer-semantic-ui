@@ -108,7 +108,7 @@ export default function EventModal({ event, selectedDate, onClose, projects = []
             </div>
             <div className="space-y-2">
               <Label>Project</Label>
-              <Select value={formData.project_id} onValueChange={(v) => handleChange('project_id', v)}>
+              <Select value={`${formData.project_id}`} onValueChange={(v) => handleChange('project_id', v)}>
                 <SelectTrigger><SelectValue placeholder="Link to a project" /></SelectTrigger>
                 <SelectContent>
                   {projects.map(p => <SelectItem key={p.id} value={p.id}>{p.title}</SelectItem>)}

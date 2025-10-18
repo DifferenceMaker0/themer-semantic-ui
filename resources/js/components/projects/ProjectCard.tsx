@@ -11,7 +11,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import { Link } from "@inertiajs/react";
-import { format } from "date-fns";
+import { format } from "date-fns"; 
 
 const statusColors = {
   planning: "bg-blue-100 text-blue-800",
@@ -34,7 +34,7 @@ const riskColors = {
   high: "text-red-600"
 };
 
-export default function ProjectCard({ project, clients }) {
+export default function ProjectCard({ project, clients = [] }) { 
   const client = clients.find(c => c.id === project.client_id);
   const isOverdue = project.due_date && new Date(project.due_date) < new Date() && project.status !== 'completed';
 

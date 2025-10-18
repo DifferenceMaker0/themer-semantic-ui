@@ -1,1 +1,0 @@
-{"version":3,"file":"icon.d.ts","sourceRoot":"","sources":["../../../../resources/js/components/ui/icon.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,cAAc,CAAC;AAE1C,UAAU,SAAS;IACf,QAAQ,CAAC,EAAE,UAAU,GAAG,IAAI,CAAC;IAC7B,SAAS,CAAC,EAAE,MAAM,CAAC;CACtB;AAED,wBAAgB,IAAI,CAAC,EAAE,QAAQ,EAAE,aAAa,EAAE,SAAS,EAAE,EAAE,SAAS,kDAMrE"}

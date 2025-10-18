@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 
-export default function ManualTimeEntryForm({ projects = [], tasks = [], onClose, onSubmit }) {
+export default function ManualTimeEntryForm({ projects = [], tasks = [], onClose, onSubmit }) { 
   const [entryData, setEntryData] = useState({
     project_id: "",
     task_id: "",
@@ -18,10 +18,25 @@ export default function ManualTimeEntryForm({ projects = [], tasks = [], onClose
     is_billable: true,
   });
 
+  console.log(entryData); 
+
   const availableTasks = entryData.project_id
     ? tasks.filter(task => task.project_id === entryData.project_id)
     : [];
 
+  console.log(availableTasks);
+  console.log(entryData.project_id);
+  console.log(entryData.task_id);
+
+  // const handleProjectChange = (v) => {
+  //   setEntryData({ ...entryData, project_id: v, task_id: "" });
+  // };
+  // const handleTaskChange = (v) => {
+  //   setEntryData({ ...entryData, task_id: v });
+  // };
+
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!entryData.project_id || !entryData.task_id || !entryData.date || !entryData.start_time || !entryData.end_time) {
@@ -59,15 +74,15 @@ export default function ManualTimeEntryForm({ projects = [], tasks = [], onClose
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Project *</Label>
-              <Select value={entryData.project_id} onValueChange={(v) => setEntryData({ ...entryData, project_id: v, task_id: "" })}>
+              <Label>Project *</Label> 
+              <Select value={`${entryData.project_id}`} onValueChange={(v) => setEntryData({ ...entryData, project_id: v, task_id: "" })}>
                 <SelectTrigger><SelectValue placeholder="Select project" /></SelectTrigger>
                 <SelectContent>{projects.map(p => <SelectItem key={p.id} value={p.id}>{p.title}</SelectItem>)}</SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
               <Label>Task *</Label>
-              <Select value={entryData.task_id} onValueChange={(v) => setEntryData({ ...entryData, task_id: v })} disabled={!entryData.project_id}>
+              <Select value={`${entryData.task_id}`} onValueChange={(v) => setEntryData({ ...entryData, task_id: v })} disabled={!entryData.project_id}>
                 <SelectTrigger><SelectValue placeholder="Select task" /></SelectTrigger>
                 <SelectContent>{availableTasks.map(t => <SelectItem key={t.id} value={t.id}>{t.title}</SelectItem>)}</SelectContent>
               </Select>

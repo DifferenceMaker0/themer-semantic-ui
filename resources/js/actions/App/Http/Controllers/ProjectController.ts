@@ -1,0 +1,597 @@
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
+/**
+* @see \App\Http\Controllers\ProjectController::index
+ * @see app/Http/Controllers/ProjectController.php:20
+ * @route '/api/projects'
+ */
+export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index.url(options),
+    method: 'get',
+})
+
+index.definition = {
+    methods: ["get","head"],
+    url: '/api/projects',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\ProjectController::index
+ * @see app/Http/Controllers/ProjectController.php:20
+ * @route '/api/projects'
+ */
+index.url = (options?: RouteQueryOptions) => {
+    return index.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProjectController::index
+ * @see app/Http/Controllers/ProjectController.php:20
+ * @route '/api/projects'
+ */
+index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index.url(options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\ProjectController::index
+ * @see app/Http/Controllers/ProjectController.php:20
+ * @route '/api/projects'
+ */
+index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: index.url(options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\ProjectController::index
+ * @see app/Http/Controllers/ProjectController.php:20
+ * @route '/api/projects'
+ */
+    const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: index.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\ProjectController::index
+ * @see app/Http/Controllers/ProjectController.php:20
+ * @route '/api/projects'
+ */
+        indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: index.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\ProjectController::index
+ * @see app/Http/Controllers/ProjectController.php:20
+ * @route '/api/projects'
+ */
+        indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: index.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    index.form = indexForm
+/**
+* @see \App\Http\Controllers\ProjectController::store
+ * @see app/Http/Controllers/ProjectController.php:89
+ * @route '/api/projects'
+ */
+export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
+    method: 'post',
+})
+
+store.definition = {
+    methods: ["post"],
+    url: '/api/projects',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\ProjectController::store
+ * @see app/Http/Controllers/ProjectController.php:89
+ * @route '/api/projects'
+ */
+store.url = (options?: RouteQueryOptions) => {
+    return store.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProjectController::store
+ * @see app/Http/Controllers/ProjectController.php:89
+ * @route '/api/projects'
+ */
+store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
+    method: 'post',
+})
+
+    /**
+* @see \App\Http\Controllers\ProjectController::store
+ * @see app/Http/Controllers/ProjectController.php:89
+ * @route '/api/projects'
+ */
+    const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: store.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\ProjectController::store
+ * @see app/Http/Controllers/ProjectController.php:89
+ * @route '/api/projects'
+ */
+        storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: store.url(options),
+            method: 'post',
+        })
+    
+    store.form = storeForm
+/**
+* @see \App\Http\Controllers\ProjectController::show
+ * @see app/Http/Controllers/ProjectController.php:112
+ * @route '/api/projects/{project}'
+ */
+export const show = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: show.url(args, options),
+    method: 'get',
+})
+
+show.definition = {
+    methods: ["get","head"],
+    url: '/api/projects/{project}',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\ProjectController::show
+ * @see app/Http/Controllers/ProjectController.php:112
+ * @route '/api/projects/{project}'
+ */
+show.url = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { project: args }
+    }
+
+            if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+            args = { project: args.id }
+        }
+    
+    if (Array.isArray(args)) {
+        args = {
+                    project: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        project: typeof args.project === 'object'
+                ? args.project.id
+                : args.project,
+                }
+
+    return show.definition.url
+            .replace('{project}', parsedArgs.project.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProjectController::show
+ * @see app/Http/Controllers/ProjectController.php:112
+ * @route '/api/projects/{project}'
+ */
+show.get = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: show.url(args, options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\ProjectController::show
+ * @see app/Http/Controllers/ProjectController.php:112
+ * @route '/api/projects/{project}'
+ */
+show.head = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: show.url(args, options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\ProjectController::show
+ * @see app/Http/Controllers/ProjectController.php:112
+ * @route '/api/projects/{project}'
+ */
+    const showForm = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: show.url(args, options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\ProjectController::show
+ * @see app/Http/Controllers/ProjectController.php:112
+ * @route '/api/projects/{project}'
+ */
+        showForm.get = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url(args, options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\ProjectController::show
+ * @see app/Http/Controllers/ProjectController.php:112
+ * @route '/api/projects/{project}'
+ */
+        showForm.head = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    show.form = showForm
+/**
+* @see \App\Http\Controllers\ProjectController::update
+ * @see app/Http/Controllers/ProjectController.php:134
+ * @route '/api/projects/{project}'
+ */
+export const update = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: update.url(args, options),
+    method: 'put',
+})
+
+update.definition = {
+    methods: ["put","patch"],
+    url: '/api/projects/{project}',
+} satisfies RouteDefinition<["put","patch"]>
+
+/**
+* @see \App\Http\Controllers\ProjectController::update
+ * @see app/Http/Controllers/ProjectController.php:134
+ * @route '/api/projects/{project}'
+ */
+update.url = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { project: args }
+    }
+
+            if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+            args = { project: args.id }
+        }
+    
+    if (Array.isArray(args)) {
+        args = {
+                    project: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        project: typeof args.project === 'object'
+                ? args.project.id
+                : args.project,
+                }
+
+    return update.definition.url
+            .replace('{project}', parsedArgs.project.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProjectController::update
+ * @see app/Http/Controllers/ProjectController.php:134
+ * @route '/api/projects/{project}'
+ */
+update.put = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: update.url(args, options),
+    method: 'put',
+})
+/**
+* @see \App\Http\Controllers\ProjectController::update
+ * @see app/Http/Controllers/ProjectController.php:134
+ * @route '/api/projects/{project}'
+ */
+update.patch = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: update.url(args, options),
+    method: 'patch',
+})
+
+    /**
+* @see \App\Http\Controllers\ProjectController::update
+ * @see app/Http/Controllers/ProjectController.php:134
+ * @route '/api/projects/{project}'
+ */
+    const updateForm = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: update.url(args, {
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'PUT',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\ProjectController::update
+ * @see app/Http/Controllers/ProjectController.php:134
+ * @route '/api/projects/{project}'
+ */
+        updateForm.put = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: update.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'PUT',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+            /**
+* @see \App\Http\Controllers\ProjectController::update
+ * @see app/Http/Controllers/ProjectController.php:134
+ * @route '/api/projects/{project}'
+ */
+        updateForm.patch = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: update.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'PATCH',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    update.form = updateForm
+/**
+* @see \App\Http\Controllers\ProjectController::destroy
+ * @see app/Http/Controllers/ProjectController.php:157
+ * @route '/api/projects/{project}'
+ */
+export const destroy = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroy.url(args, options),
+    method: 'delete',
+})
+
+destroy.definition = {
+    methods: ["delete"],
+    url: '/api/projects/{project}',
+} satisfies RouteDefinition<["delete"]>
+
+/**
+* @see \App\Http\Controllers\ProjectController::destroy
+ * @see app/Http/Controllers/ProjectController.php:157
+ * @route '/api/projects/{project}'
+ */
+destroy.url = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { project: args }
+    }
+
+            if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+            args = { project: args.id }
+        }
+    
+    if (Array.isArray(args)) {
+        args = {
+                    project: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        project: typeof args.project === 'object'
+                ? args.project.id
+                : args.project,
+                }
+
+    return destroy.definition.url
+            .replace('{project}', parsedArgs.project.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProjectController::destroy
+ * @see app/Http/Controllers/ProjectController.php:157
+ * @route '/api/projects/{project}'
+ */
+destroy.delete = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroy.url(args, options),
+    method: 'delete',
+})
+
+    /**
+* @see \App\Http\Controllers\ProjectController::destroy
+ * @see app/Http/Controllers/ProjectController.php:157
+ * @route '/api/projects/{project}'
+ */
+    const destroyForm = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: destroy.url(args, {
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'DELETE',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\ProjectController::destroy
+ * @see app/Http/Controllers/ProjectController.php:157
+ * @route '/api/projects/{project}'
+ */
+        destroyForm.delete = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: destroy.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'DELETE',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    destroy.form = destroyForm
+/**
+* @see \App\Http\Controllers\ProjectController::stats
+ * @see app/Http/Controllers/ProjectController.php:185
+ * @route '/api/projects-stats'
+ */
+export const stats = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: stats.url(options),
+    method: 'get',
+})
+
+stats.definition = {
+    methods: ["get","head"],
+    url: '/api/projects-stats',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\ProjectController::stats
+ * @see app/Http/Controllers/ProjectController.php:185
+ * @route '/api/projects-stats'
+ */
+stats.url = (options?: RouteQueryOptions) => {
+    return stats.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProjectController::stats
+ * @see app/Http/Controllers/ProjectController.php:185
+ * @route '/api/projects-stats'
+ */
+stats.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: stats.url(options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\ProjectController::stats
+ * @see app/Http/Controllers/ProjectController.php:185
+ * @route '/api/projects-stats'
+ */
+stats.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: stats.url(options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\ProjectController::stats
+ * @see app/Http/Controllers/ProjectController.php:185
+ * @route '/api/projects-stats'
+ */
+    const statsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: stats.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\ProjectController::stats
+ * @see app/Http/Controllers/ProjectController.php:185
+ * @route '/api/projects-stats'
+ */
+        statsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: stats.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\ProjectController::stats
+ * @see app/Http/Controllers/ProjectController.php:185
+ * @route '/api/projects-stats'
+ */
+        statsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: stats.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    stats.form = statsForm
+/**
+* @see \App\Http\Controllers\ProjectController::analyze
+ * @see app/Http/Controllers/ProjectController.php:219
+ * @route '/api/projects/{project}/analyze'
+ */
+export const analyze = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyze.url(args, options),
+    method: 'post',
+})
+
+analyze.definition = {
+    methods: ["post"],
+    url: '/api/projects/{project}/analyze',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\ProjectController::analyze
+ * @see app/Http/Controllers/ProjectController.php:219
+ * @route '/api/projects/{project}/analyze'
+ */
+analyze.url = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { project: args }
+    }
+
+            if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+            args = { project: args.id }
+        }
+    
+    if (Array.isArray(args)) {
+        args = {
+                    project: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        project: typeof args.project === 'object'
+                ? args.project.id
+                : args.project,
+                }
+
+    return analyze.definition.url
+            .replace('{project}', parsedArgs.project.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProjectController::analyze
+ * @see app/Http/Controllers/ProjectController.php:219
+ * @route '/api/projects/{project}/analyze'
+ */
+analyze.post = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyze.url(args, options),
+    method: 'post',
+})
+
+    /**
+* @see \App\Http\Controllers\ProjectController::analyze
+ * @see app/Http/Controllers/ProjectController.php:219
+ * @route '/api/projects/{project}/analyze'
+ */
+    const analyzeForm = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: analyze.url(args, options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\ProjectController::analyze
+ * @see app/Http/Controllers/ProjectController.php:219
+ * @route '/api/projects/{project}/analyze'
+ */
+        analyzeForm.post = (args: { project: number | { id: number } } | [project: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: analyze.url(args, options),
+            method: 'post',
+        })
+    
+    analyze.form = analyzeForm
+const ProjectController = { index, store, show, update, destroy, stats, analyze }
+
+export default ProjectController

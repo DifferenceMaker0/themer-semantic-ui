@@ -21,12 +21,12 @@ export default function ProjectCreationModal({
   clients = [] 
 }: ProjectCreationModalProps) {
   const [formData, setFormData] = useState({
-    name: '',
+    title: '',
     description: '',
     client_id: '',
-    budget: '',
+    project_type: '',
     start_date: '',
-    end_date: '',
+    due_date: '',
     status: 'planning',
     priority: 'medium'
   });
@@ -35,12 +35,12 @@ export default function ProjectCreationModal({
     e.preventDefault();
     onSubmit(formData);
     setFormData({
-      name: '',
+      title: '',
       description: '',
       client_id: '',
-      budget: '',
+      project_type: '',
       start_date: '',
-      end_date: '',
+      due_date: '',
       status: 'planning',
       priority: 'medium'
     });
@@ -48,12 +48,12 @@ export default function ProjectCreationModal({
 
   const handleCancel = () => {
     setFormData({
-      name: '',
+      title: '',
       description: '',
       client_id: '',
-      budget: '',
+      project_type: '',
       start_date: '',
-      end_date: '',
+      due_date: '',
       status: 'planning',
       priority: 'medium'
     });
@@ -76,12 +76,12 @@ export default function ProjectCreationModal({
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Project Name *</Label>
+              <Label htmlFor="title">Project Title *</Label>
               <Input
-                id="name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="Enter project name"
+                id="title"
+                value={formData.title}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                placeholder="Enter project title"
                 required
               />
             </div>
@@ -95,7 +95,7 @@ export default function ProjectCreationModal({
                 <SelectContent>
                   {clients.map((client) => (
                     <SelectItem key={client.id} value={client.id}>
-                      {client.name}
+                      {client.company_name}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -112,24 +112,34 @@ export default function ProjectCreationModal({
               placeholder="Describe the project goals and requirements"
               rows={3}
             />
+          </div> 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="project_type">Project Type</Label>
+              <Select value={formData.project_type} onValueChange={(value) => setFormData({ ...formData, project_type: value })}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+              <SelectContent> 
+                <SelectItem value="web_design">web_design</SelectItem>
+                <SelectItem value="web_development">web_development</SelectItem>
+                <SelectItem value="mobile_app">mobile_app</SelectItem>
+                <SelectItem value="content_writing">content_writing</SelectItem>
+                <SelectItem value="copywriting">copywriting</SelectItem>
+                <SelectItem value="seo">seo</SelectItem>
+                <SelectItem value="social_media">social_media</SelectItem>
+                <SelectItem value="consulting">consulting</SelectItem>
+                <SelectItem value="branding">branding</SelectItem>
+                <SelectItem value="ui_ux_design">ui_ux_design</SelectItem>
+                <SelectItem value="e_commerce">e_commerce</SelectItem>
+                <SelectItem value="maintenance">maintenance</SelectItem>
+                <SelectItem value="other">other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div> 
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="budget">Budget</Label>
-              <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <Input
-                  id="budget"
-                  type="number"
-                  value={formData.budget}
-                  onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                  placeholder="0.00"
-                  className="pl-10"
-                />
-              </div>
-            </div>
-            
             <div className="space-y-2">
               <Label htmlFor="priority">Priority</Label>
               <Select value={formData.priority} onValueChange={(value) => setFormData({ ...formData, priority: value })}>
@@ -143,7 +153,7 @@ export default function ProjectCreationModal({
                   <SelectItem value="urgent">Urgent</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
+            </div> 
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -158,12 +168,12 @@ export default function ProjectCreationModal({
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="end_date">End Date</Label>
+              <Label htmlFor="due_date">Due Date</Label>
               <Input
-                id="end_date"
+                id="due_date"
                 type="date"
-                value={formData.end_date}
-                onChange={(e) => setFormData({ ...formData, end_date: e.target.value })}
+                value={formData.due_date}
+                onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
               />
             </div>
           </div>

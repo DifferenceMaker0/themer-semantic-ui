@@ -1,1 +1,0 @@
-{"version":3,"file":"text-link.d.ts","sourceRoot":"","sources":["../../../resources/js/components/text-link.tsx"],"names":[],"mappings":"AACA,OAAO,EAAE,IAAI,EAAE,MAAM,kBAAkB,CAAC;AACxC,OAAO,EAAE,cAAc,EAAE,MAAM,OAAO,CAAC;AAEvC,KAAK,SAAS,GAAG,cAAc,CAAC,OAAO,IAAI,CAAC,CAAC;AAE7C,MAAM,CAAC,OAAO,UAAU,QAAQ,CAAC,EAC7B,SAAc,EACd,QAAQ,EACR,GAAG,KAAK,EACX,EAAE,SAAS,2CAYX"}

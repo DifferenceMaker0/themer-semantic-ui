@@ -21,6 +21,9 @@ export default function LiveTimer({ projects = [], tasks = [], onTimerStop, isLo
     ? tasks.filter(task => task.project_id === selectedProjectId)
     : [];
 
+  console.log(selectedProjectId);
+  console.log(selectedTaskId);
+  
   useEffect(() => {
     let interval;
     if (isRunning) {
