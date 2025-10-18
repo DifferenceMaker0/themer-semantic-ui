@@ -28,7 +28,7 @@ yarn-error.log
 .temp/
 .temp/*
 crm
-social-media
+/social-media/social-media-generator
 SOURCE_ENTITIES
 src
 temp-backup-root-app
@@ -44,3 +44,4 @@ API_RESTORATION_AND_ENTITY_INTEGRATION_COMPLETE.md
 development
 legacy_*
 backup_*
+public/build.zip

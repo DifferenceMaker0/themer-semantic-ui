@@ -12,26 +12,37 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TimeEntryController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SocialMediaPostController;
 
-Route::prefix('petstore')->group(function () {
-    // GET /api/petstore - Index (List all pets)
-    Route::get('/', [PetController::class, 'index']);
-
-    // POST /api/petstore - Store (Create a new pet)
-    Route::post('/', [PetController::class, 'store']);
-
-    // GET /api/petstore/{id} - Show (View details of one pet)
-    Route::get('/{id}', [PetController::class, 'show']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('petstore')->group(function () { 
+        // GET /api/petstore - Index (List all pets)
+        Route::get('/', [PetController::class, 'index']); 
+        // POST /api/petstore - Store (Create a new pet)
+        Route::post('/', [PetController::class, 'store']); 
+        // GET /api/petstore/{id} - Show (View details of one pet)
+        Route::get('/{id}', [PetController::class, 'show']);
+        // PUT /api/petstore/{id} - Update (Edit a pet)
+        Route::put('/{id}', [PetController::class, 'update']); 
+        // DELETE /api/petstore/{id} - Destroy (Delete a pet)
+        Route::delete('/{id}', [PetController::class, 'destroy']); 
+    });
 });
 
 Route::resource('petstore', PetController::class);
 
+// Social Media Posts API routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('social-media-posts', SocialMediaPostController::class);
+});
+
 // Settings API routes
 Route::prefix('settings')->group(function () {
-    Route::get('/', [App\Http\Controllers\SettingsController::class, 'index']);
-    Route::put('/', [App\Http\Controllers\SettingsController::class, 'update']);
-    Route::post('/reset', [App\Http\Controllers\SettingsController::class, 'reset']);
-    Route::get('/bootstrap', [App\Http\Controllers\SettingsController::class, 'bootstrap']);
+    Route::get('/', [SettingsController::class, 'index']);
+    Route::put('/', [SettingsController::class, 'update']);
+    Route::post('/reset', [SettingsController::class, 'reset']);
+    Route::get('/bootstrap', [SettingsController::class, 'bootstrap']);
 });
 
 Route::get('/user', function (Request $request) {

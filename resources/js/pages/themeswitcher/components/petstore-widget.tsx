@@ -6,7 +6,14 @@ import { Store, Plus, RotateCcw, Eye, X } from 'lucide-react';
 const API_BASE = '/api/petstore';
 
 const fetchPets = async (): Promise<Pet[]> => {
-    const response = await fetch(API_BASE);
+    const response = await fetch(API_BASE, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        credentials: 'same-origin',
+    });
     if (!response.ok) {
         throw new Error('Failed to fetch pets');
     }
@@ -20,26 +27,38 @@ const createPet = async (petData: { name: string; age: number; species?: string 
         age: petData.age.toString(),
         ...(petData.species && { species: petData.species })
     });
-    
+
+    // Get CSRF token from meta tag
+    const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
     const response = await fetch(`${API_BASE}?${queryParams}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
+            ...(token && { 'X-CSRF-TOKEN': token }),
         },
+        credentials: 'same-origin', // Important for CSRF protection
     });
-    
+
     if (!response.ok) {
         const error = await response.json();
         throw new Error(error.message || 'Failed to create pet');
     }
-    
+
     const result = await response.json();
     return result.data;
 };
 
 const fetchPetDetails = async (id: number): Promise<Pet> => {
-    const response = await fetch(`${API_BASE}/${id}`);
+    const response = await fetch(`${API_BASE}/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        credentials: 'same-origin',
+    });
     if (!response.ok) {
         throw new Error('Failed to fetch pet details');
     }

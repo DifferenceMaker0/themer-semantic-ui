@@ -333,6 +333,377 @@ export const show = {
 }
 
 /**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+const updatebb9a77135af967b3422456d5d1d54d3d = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updatebb9a77135af967b3422456d5d1d54d3d.url(args, options),
+    method: 'put',
+})
+
+updatebb9a77135af967b3422456d5d1d54d3d.definition = {
+    methods: ["put"],
+    url: '/api/petstore/{id}',
+} satisfies RouteDefinition<["put"]>
+
+/**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+updatebb9a77135af967b3422456d5d1d54d3d.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { id: args }
+    }
+
+    
+    if (Array.isArray(args)) {
+        args = {
+                    id: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        id: args.id,
+                }
+
+    return updatebb9a77135af967b3422456d5d1d54d3d.definition.url
+            .replace('{id}', parsedArgs.id.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+updatebb9a77135af967b3422456d5d1d54d3d.put = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updatebb9a77135af967b3422456d5d1d54d3d.url(args, options),
+    method: 'put',
+})
+
+    /**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+    const updatebb9a77135af967b3422456d5d1d54d3dForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: updatebb9a77135af967b3422456d5d1d54d3d.url(args, {
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'PUT',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+        updatebb9a77135af967b3422456d5d1d54d3dForm.put = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: updatebb9a77135af967b3422456d5d1d54d3d.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'PUT',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    updatebb9a77135af967b3422456d5d1d54d3d.form = updatebb9a77135af967b3422456d5d1d54d3dForm
+    /**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+const update7e99ce898fcf6519f742a9b80c6f2fcd = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: update7e99ce898fcf6519f742a9b80c6f2fcd.url(args, options),
+    method: 'put',
+})
+
+update7e99ce898fcf6519f742a9b80c6f2fcd.definition = {
+    methods: ["put","patch"],
+    url: '/api/petstore/{petstore}',
+} satisfies RouteDefinition<["put","patch"]>
+
+/**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+update7e99ce898fcf6519f742a9b80c6f2fcd.url = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { petstore: args }
+    }
+
+    
+    if (Array.isArray(args)) {
+        args = {
+                    petstore: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        petstore: args.petstore,
+                }
+
+    return update7e99ce898fcf6519f742a9b80c6f2fcd.definition.url
+            .replace('{petstore}', parsedArgs.petstore.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+update7e99ce898fcf6519f742a9b80c6f2fcd.put = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: update7e99ce898fcf6519f742a9b80c6f2fcd.url(args, options),
+    method: 'put',
+})
+/**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+update7e99ce898fcf6519f742a9b80c6f2fcd.patch = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: update7e99ce898fcf6519f742a9b80c6f2fcd.url(args, options),
+    method: 'patch',
+})
+
+    /**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+    const update7e99ce898fcf6519f742a9b80c6f2fcdForm = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: update7e99ce898fcf6519f742a9b80c6f2fcd.url(args, {
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'PUT',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+        update7e99ce898fcf6519f742a9b80c6f2fcdForm.put = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: update7e99ce898fcf6519f742a9b80c6f2fcd.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'PUT',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+            /**
+* @see \App\Http\Controllers\PetController::update
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+        update7e99ce898fcf6519f742a9b80c6f2fcdForm.patch = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: update7e99ce898fcf6519f742a9b80c6f2fcd.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'PATCH',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    update7e99ce898fcf6519f742a9b80c6f2fcd.form = update7e99ce898fcf6519f742a9b80c6f2fcdForm
+
+export const update = {
+    '/api/petstore/{id}': updatebb9a77135af967b3422456d5d1d54d3d,
+    '/api/petstore/{petstore}': update7e99ce898fcf6519f742a9b80c6f2fcd,
+}
+
+/**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+const destroybb9a77135af967b3422456d5d1d54d3d = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroybb9a77135af967b3422456d5d1d54d3d.url(args, options),
+    method: 'delete',
+})
+
+destroybb9a77135af967b3422456d5d1d54d3d.definition = {
+    methods: ["delete"],
+    url: '/api/petstore/{id}',
+} satisfies RouteDefinition<["delete"]>
+
+/**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+destroybb9a77135af967b3422456d5d1d54d3d.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { id: args }
+    }
+
+    
+    if (Array.isArray(args)) {
+        args = {
+                    id: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        id: args.id,
+                }
+
+    return destroybb9a77135af967b3422456d5d1d54d3d.definition.url
+            .replace('{id}', parsedArgs.id.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+destroybb9a77135af967b3422456d5d1d54d3d.delete = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroybb9a77135af967b3422456d5d1d54d3d.url(args, options),
+    method: 'delete',
+})
+
+    /**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+    const destroybb9a77135af967b3422456d5d1d54d3dForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: destroybb9a77135af967b3422456d5d1d54d3d.url(args, {
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'DELETE',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{id}'
+ */
+        destroybb9a77135af967b3422456d5d1d54d3dForm.delete = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: destroybb9a77135af967b3422456d5d1d54d3d.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'DELETE',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    destroybb9a77135af967b3422456d5d1d54d3d.form = destroybb9a77135af967b3422456d5d1d54d3dForm
+    /**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+const destroy7e99ce898fcf6519f742a9b80c6f2fcd = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroy7e99ce898fcf6519f742a9b80c6f2fcd.url(args, options),
+    method: 'delete',
+})
+
+destroy7e99ce898fcf6519f742a9b80c6f2fcd.definition = {
+    methods: ["delete"],
+    url: '/api/petstore/{petstore}',
+} satisfies RouteDefinition<["delete"]>
+
+/**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+destroy7e99ce898fcf6519f742a9b80c6f2fcd.url = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { petstore: args }
+    }
+
+    
+    if (Array.isArray(args)) {
+        args = {
+                    petstore: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        petstore: args.petstore,
+                }
+
+    return destroy7e99ce898fcf6519f742a9b80c6f2fcd.definition.url
+            .replace('{petstore}', parsedArgs.petstore.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+destroy7e99ce898fcf6519f742a9b80c6f2fcd.delete = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroy7e99ce898fcf6519f742a9b80c6f2fcd.url(args, options),
+    method: 'delete',
+})
+
+    /**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+    const destroy7e99ce898fcf6519f742a9b80c6f2fcdForm = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: destroy7e99ce898fcf6519f742a9b80c6f2fcd.url(args, {
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'DELETE',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\PetController::destroy
+ * @see app/Http/Controllers/PetController.php:0
+ * @route '/api/petstore/{petstore}'
+ */
+        destroy7e99ce898fcf6519f742a9b80c6f2fcdForm.delete = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: destroy7e99ce898fcf6519f742a9b80c6f2fcd.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'DELETE',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    destroy7e99ce898fcf6519f742a9b80c6f2fcd.form = destroy7e99ce898fcf6519f742a9b80c6f2fcdForm
+
+export const destroy = {
+    '/api/petstore/{id}': destroybb9a77135af967b3422456d5d1d54d3d,
+    '/api/petstore/{petstore}': destroy7e99ce898fcf6519f742a9b80c6f2fcd,
+}
+
+/**
 * @see \App\Http\Controllers\PetController::create
  * @see app/Http/Controllers/PetController.php:0
  * @route '/api/petstore/create'
@@ -507,197 +878,6 @@ edit.head = (args: { petstore: string | number } | [petstore: string | number ] 
         })
     
     edit.form = editForm
-/**
-* @see \App\Http\Controllers\PetController::update
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-export const update = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: update.url(args, options),
-    method: 'put',
-})
-
-update.definition = {
-    methods: ["put","patch"],
-    url: '/api/petstore/{petstore}',
-} satisfies RouteDefinition<["put","patch"]>
-
-/**
-* @see \App\Http\Controllers\PetController::update
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-update.url = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { petstore: args }
-    }
-
-    
-    if (Array.isArray(args)) {
-        args = {
-                    petstore: args[0],
-                }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-                        petstore: args.petstore,
-                }
-
-    return update.definition.url
-            .replace('{petstore}', parsedArgs.petstore.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\PetController::update
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-update.put = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: update.url(args, options),
-    method: 'put',
-})
-/**
-* @see \App\Http\Controllers\PetController::update
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-update.patch = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
-    url: update.url(args, options),
-    method: 'patch',
-})
-
-    /**
-* @see \App\Http\Controllers\PetController::update
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-    const updateForm = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: update.url(args, {
-                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                        _method: 'PUT',
-                        ...(options?.query ?? options?.mergeQuery ?? {}),
-                    }
-                }),
-        method: 'post',
-    })
-
-            /**
-* @see \App\Http\Controllers\PetController::update
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-        updateForm.put = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: update.url(args, {
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'PUT',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'post',
-        })
-            /**
-* @see \App\Http\Controllers\PetController::update
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-        updateForm.patch = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: update.url(args, {
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'PATCH',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'post',
-        })
-    
-    update.form = updateForm
-/**
-* @see \App\Http\Controllers\PetController::destroy
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-export const destroy = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
-    url: destroy.url(args, options),
-    method: 'delete',
-})
-
-destroy.definition = {
-    methods: ["delete"],
-    url: '/api/petstore/{petstore}',
-} satisfies RouteDefinition<["delete"]>
-
-/**
-* @see \App\Http\Controllers\PetController::destroy
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-destroy.url = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { petstore: args }
-    }
-
-    
-    if (Array.isArray(args)) {
-        args = {
-                    petstore: args[0],
-                }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-                        petstore: args.petstore,
-                }
-
-    return destroy.definition.url
-            .replace('{petstore}', parsedArgs.petstore.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\PetController::destroy
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-destroy.delete = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
-    url: destroy.url(args, options),
-    method: 'delete',
-})
-
-    /**
-* @see \App\Http\Controllers\PetController::destroy
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-    const destroyForm = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: destroy.url(args, {
-                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                        _method: 'DELETE',
-                        ...(options?.query ?? options?.mergeQuery ?? {}),
-                    }
-                }),
-        method: 'post',
-    })
-
-            /**
-* @see \App\Http\Controllers\PetController::destroy
- * @see app/Http/Controllers/PetController.php:0
- * @route '/api/petstore/{petstore}'
- */
-        destroyForm.delete = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: destroy.url(args, {
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'DELETE',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'post',
-        })
-    
-    destroy.form = destroyForm
-const PetController = { index, store, show, create, edit, update, destroy }
+const PetController = { index, store, show, update, destroy, create, edit }
 
 export default PetController

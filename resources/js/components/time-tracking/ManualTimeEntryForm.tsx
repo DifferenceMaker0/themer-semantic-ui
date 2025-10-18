@@ -18,15 +18,15 @@ export default function ManualTimeEntryForm({ projects = [], tasks = [], onClose
     is_billable: true,
   });
 
-  console.log(entryData); 
+  // console.log(entryData); 
 
   const availableTasks = entryData.project_id
     ? tasks.filter(task => task.project_id === entryData.project_id)
     : [];
 
-  console.log(availableTasks);
-  console.log(entryData.project_id);
-  console.log(entryData.task_id);
+  // console.log(availableTasks);
+  // console.log(entryData.project_id);
+  // console.log(entryData.task_id);
 
   // const handleProjectChange = (v) => {
   //   setEntryData({ ...entryData, project_id: v, task_id: "" });
