@@ -171,7 +171,7 @@ class SettingsService
         switch ($userType) {
             case 'user':
             case 'admin':
-                return $identifier ?? (Auth::check() ? Auth::user()->email : null);
+                return $identifier ?? (Auth::check() ? Auth::user()->id : null);
             case 'guest':
                 return $identifier ?? session()->getId();
             default:
@@ -186,21 +186,21 @@ class SettingsService
     {
         $userSetting = new UserSetting();
         $userSetting->user_type = $userType;
-        
+
         switch ($userType) {
             case 'user':
             case 'admin':
-                $userSetting->user_email = $identifier;
+                $userSetting->user_id = $identifier;
                 break;
             case 'guest':
                 $userSetting->session_id = $identifier;
                 break;
         }
-        
+
         $userSetting->theme = $settingsData['theme'];
         $userSetting->settings = $settingsData['settings'];
         $userSetting->save();
-        
+
         return $userSetting;
     }
     

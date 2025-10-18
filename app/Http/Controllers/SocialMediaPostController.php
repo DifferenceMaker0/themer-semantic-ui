@@ -36,7 +36,7 @@ class SocialMediaPostController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
+        $validatedData = $request->validate([
             'content' => 'required|string|max:5000',
             'platform' => 'required|string|max:255',
             'hashtags' => 'sometimes|array',
@@ -44,30 +44,18 @@ class SocialMediaPostController extends Controller
             'template_name' => 'nullable|string|max:255',
             'tone' => 'nullable|string|max:255',
         ]);
-
-        if ($validator->fails()) {
+        if (!$validatedData) {
             return response()->json([
                 'success' => false,
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
-            ], 422);
+                'message' => 'Validation Json Data Failed',
+                'errors' => $validatedData->errors()
+            ], 422); 
         }
 
-        try {
-            $post = SocialMediaPost::create($request->validated());
+        $record = SocialMediaPost::create($validatedData);
 
-            return response()->json([
-                'success' => true,
-                'data' => $post,
-                'message' => 'Post saved successfully'
-            ], 201);
-        } catch (\Exception $e) {
-            Log::error('Error creating social media post: ' . $e->getMessage());
-            return response()->json([
-                'success' => false,
-                'message' => 'Error saving post'
-            ], 500);
-        }
+        return response()->json($record, 201);
+
     }
 
     /**

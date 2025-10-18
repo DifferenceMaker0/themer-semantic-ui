@@ -1,4 +1,5 @@
 // Social Media API Service for database operations
+import { createCSRFHeaders } from '../../utils/csrf-utils';
 
 export interface SocialMediaPost {
     id?: string;
@@ -22,44 +23,29 @@ class SocialMediaApiService {
     private readonly API_BASE = '/api/social-media-posts';
 
     /**
-     * Get CSRF token from meta tag
-     */
-    private getCSRFToken(): string | null {
-        return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || null;
-    }
-
-    /**
-     * Make API request with proper headers
+     * Make API request with CSRF protection
      */
     private async makeRequest<T>(
-        url: string, 
+        url: string,
         options: RequestInit = {}
     ): Promise<ApiResponse<T>> {
-        const token = this.getCSRFToken();
-        
-        const defaultHeaders: HeadersInit = {
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'Accept': 'application/json',
-        };
-
-        if (token) {
-            defaultHeaders['X-CSRF-TOKEN'] = token;
-        }
-
         const response = await fetch(url, {
             ...options,
             headers: {
-                ...defaultHeaders,
+                ...createCSRFHeaders(),
                 ...options.headers,
             },
             credentials: 'same-origin',
         });
 
-        const result = await response.json();
-        
         if (!response.ok) {
-            throw new Error(result.message || `HTTP ${response.status}: ${response.statusText}`);
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const result: ApiResponse<T> = await response.json();
+
+        if (!result.success) {
+            throw new Error(result.message || 'API request failed');
         }
 
         return result;
@@ -144,7 +130,7 @@ class SocialMediaApiService {
     async getPost(id: string): Promise<SocialMediaPost> {
         try {
             const response = await this.makeRequest<SocialMediaPost>(`${this.API_BASE}/${id}`);
-            
+
             if (!response.success || !response.data) {
                 throw new Error(response.message || 'Post not found');
             }

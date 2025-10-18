@@ -134,7 +134,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{id}'
  */
 const showbb9a77135af967b3422456d5d1d54d3d = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -149,7 +149,7 @@ showbb9a77135af967b3422456d5d1d54d3d.definition = {
 
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{id}'
  */
 showbb9a77135af967b3422456d5d1d54d3d.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -177,7 +177,7 @@ showbb9a77135af967b3422456d5d1d54d3d.url = (args: { id: string | number } | [id:
 
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{id}'
  */
 showbb9a77135af967b3422456d5d1d54d3d.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -186,7 +186,7 @@ showbb9a77135af967b3422456d5d1d54d3d.get = (args: { id: string | number } | [id:
 })
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{id}'
  */
 showbb9a77135af967b3422456d5d1d54d3d.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -196,7 +196,7 @@ showbb9a77135af967b3422456d5d1d54d3d.head = (args: { id: string | number } | [id
 
     /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{id}'
  */
     const showbb9a77135af967b3422456d5d1d54d3dForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -206,7 +206,7 @@ showbb9a77135af967b3422456d5d1d54d3d.head = (args: { id: string | number } | [id
 
             /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{id}'
  */
         showbb9a77135af967b3422456d5d1d54d3dForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -215,7 +215,7 @@ showbb9a77135af967b3422456d5d1d54d3d.head = (args: { id: string | number } | [id
         })
             /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{id}'
  */
         showbb9a77135af967b3422456d5d1d54d3dForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -231,7 +231,7 @@ showbb9a77135af967b3422456d5d1d54d3d.head = (args: { id: string | number } | [id
     showbb9a77135af967b3422456d5d1d54d3d.form = showbb9a77135af967b3422456d5d1d54d3dForm
     /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
 const show7e99ce898fcf6519f742a9b80c6f2fcd = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -246,7 +246,7 @@ show7e99ce898fcf6519f742a9b80c6f2fcd.definition = {
 
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
 show7e99ce898fcf6519f742a9b80c6f2fcd.url = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -274,7 +274,7 @@ show7e99ce898fcf6519f742a9b80c6f2fcd.url = (args: { petstore: string | number } 
 
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
 show7e99ce898fcf6519f742a9b80c6f2fcd.get = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -283,7 +283,7 @@ show7e99ce898fcf6519f742a9b80c6f2fcd.get = (args: { petstore: string | number } 
 })
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
 show7e99ce898fcf6519f742a9b80c6f2fcd.head = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -293,7 +293,7 @@ show7e99ce898fcf6519f742a9b80c6f2fcd.head = (args: { petstore: string | number }
 
     /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
     const show7e99ce898fcf6519f742a9b80c6f2fcdForm = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -303,7 +303,7 @@ show7e99ce898fcf6519f742a9b80c6f2fcd.head = (args: { petstore: string | number }
 
             /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
         show7e99ce898fcf6519f742a9b80c6f2fcdForm.get = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -312,7 +312,7 @@ show7e99ce898fcf6519f742a9b80c6f2fcd.head = (args: { petstore: string | number }
         })
             /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
         show7e99ce898fcf6519f742a9b80c6f2fcdForm.head = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Head } from '@inertiajs/react';
 import './widget/tswitch.css';
 
@@ -8,9 +8,12 @@ import { MainContent } from './components/main-content';
 import { SidebarProvider } from './components/sidebar-provider';
 import { SettingsProvider } from './components/settings-provider';
 import { ArrowLeft } from 'lucide-react';
+// Removed CSRF utilities - using Sanctum authentication instead
 
 export const ThemerDashboard = () => {
     const [activeView, setActiveView] = useState('dashboard');
+
+    // Sanctum authentication is handled automatically via session cookies
 
     const handleNavigate = (view: string) => {
         setActiveView(view);

@@ -1,5 +1,21 @@
 import React, { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
-import { settingsService, UserSettings, BootstrapData } from '../services/settings-service';
+
+// Local settings interfaces (no API dependency)
+interface UserSettings {
+    theme: string;
+    sidebar_collapsed: boolean;
+    appearance: string;
+}
+
+interface BootstrapData {
+    user: {
+        id: number;
+        name: string;
+        email: string;
+    };
+    permissions: string[];
+    features: string[];
+}
 
 interface SettingsContextType {
     // State
@@ -37,17 +53,44 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
         initializeSettings();
     }, []);
 
+    // Apply theme to document
+    const applyTheme = (theme: string) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.className = theme;
+        localStorage.setItem('appearance', theme);
+    };
+
     const initializeSettings = async () => {
         try {
             setLoading(true);
             setError(null);
-            
-            const bootstrap = await settingsService.initialize();
+
+            // Mock bootstrap data for demo
+            const bootstrap: BootstrapData = {
+                user: {
+                    id: 1,
+                    name: 'Demo User',
+                    email: 'user@example.com'
+                },
+                permissions: ['read', 'write'],
+                features: ['themes', 'petstore', 'social-media']
+            };
             setBootstrapData(bootstrap);
-            
-            const userSettings = await settingsService.getUserSettings();
+
+            // Load settings from localStorage
+            const savedSettings = localStorage.getItem('themeswitcher-settings');
+            const userSettings: UserSettings = savedSettings
+                ? JSON.parse(savedSettings)
+                : {
+                    theme: 'light',
+                    sidebar_collapsed: false,
+                    appearance: 'light'
+                };
             setSettings(userSettings);
-            
+
+            // Apply initial theme
+            applyTheme(userSettings.theme);
+
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Failed to initialize settings';
             setError(errorMessage);
@@ -60,52 +103,63 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
     const updateTheme = useCallback(async (theme: string) => {
         try {
             setError(null);
-            
+
+            if (!settings) return;
+
             // Apply theme immediately for better UX
-            settingsService.applyTheme(theme);
-            
-            // Update settings in backend
-            const updatedSettings = await settingsService.updateSettings({ theme: theme as UserSettings['theme'] });
+            applyTheme(theme);
+
+            // Update settings in localStorage
+            const updatedSettings = { ...settings, theme, appearance: theme };
             setSettings(updatedSettings);
-            
+            localStorage.setItem('themeswitcher-settings', JSON.stringify(updatedSettings));
+
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Failed to update theme';
             setError(errorMessage);
             console.error('Theme update error:', err);
             throw err;
         }
-    }, []);
+    }, [settings]);
 
     const updateSettings = useCallback(async (newSettings: Partial<UserSettings>) => {
         try {
             setError(null);
-            
-            const updatedSettings = await settingsService.updateSettings(newSettings);
+
+            if (!settings) return;
+
+            const updatedSettings = { ...settings, ...newSettings };
             setSettings(updatedSettings);
-            
+            localStorage.setItem('themeswitcher-settings', JSON.stringify(updatedSettings));
+
             // If theme was updated, apply it
             if (newSettings.theme) {
-                settingsService.applyTheme(newSettings.theme);
+                applyTheme(newSettings.theme);
             }
-            
+
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Failed to update settings';
             setError(errorMessage);
             console.error('Settings update error:', err);
             throw err;
         }
-    }, []);
+    }, [settings]);
 
     const resetSettings = useCallback(async () => {
         try {
             setError(null);
-            
-            const defaultSettings = await settingsService.resetSettings();
+
+            const defaultSettings: UserSettings = {
+                theme: 'light',
+                sidebar_collapsed: false,
+                appearance: 'light'
+            };
             setSettings(defaultSettings);
-            
+            localStorage.setItem('themeswitcher-settings', JSON.stringify(defaultSettings));
+
             // Apply default theme
-            settingsService.applyTheme(defaultSettings.theme);
-            
+            applyTheme(defaultSettings.theme);
+
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Failed to reset settings';
             setError(errorMessage);
@@ -117,18 +171,19 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
     const refreshSettings = useCallback(async () => {
         try {
             setError(null);
-            
-            // Clear cache to force fresh fetch
-            settingsService.clearCache();
-            
-            const [bootstrap, userSettings] = await Promise.all([
-                settingsService.getBootstrapData(),
-                settingsService.getUserSettings()
-            ]);
-            
-            setBootstrapData(bootstrap);
+
+            // Reload from localStorage
+            const savedSettings = localStorage.getItem('themeswitcher-settings');
+            const userSettings: UserSettings = savedSettings
+                ? JSON.parse(savedSettings)
+                : {
+                    theme: 'light',
+                    sidebar_collapsed: false,
+                    appearance: 'light'
+                };
             setSettings(userSettings);
-            
+            applyTheme(userSettings.theme);
+
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Failed to refresh settings';
             setError(errorMessage);

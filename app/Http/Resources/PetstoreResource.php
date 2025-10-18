@@ -18,6 +18,7 @@ class PetstoreResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'age' => $this->age,
+            'species' => $this->species,
             'tags' => TagResource::collection($this->whenLoaded('tags')), 
         ]; 
     }

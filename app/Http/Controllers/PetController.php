@@ -37,40 +37,22 @@ class PetController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        // 1. Validation targeting URL query parameters (Matching Pet Model fillable: name, age, species)
-        $validator = Validator::make($request->query(), [
-            'name' => 'required|string|max:255',
-            'age' => 'required|integer|min:1',
-            'species' => 'nullable|string|max:255',
-        ]);
+        // Validate the incoming JSON data
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'age' => 'required|integer',
+                'species' => 'nullable|string',
+            ]); 
+            if (!$validatedData) {
+                return response()->json([
+                    'message' => 'Validation Json Data Failed',
+                    'errors' => $validatedData->errors()
+                ], 422); 
+            }
+            // Create a new record in the database
+            $record = Pet::create($validatedData);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation Failed',
-                'errors' => $validator->errors()
-            ], 422); 
-        }
-
-        // 2. Data Persistence (Using Eloquent ORM to interact with MySQL)
-        try {
-            $newPet = Pet::create($request->query());
-
-            // Reload the resource, loading tags (will be an empty collection initially)
-            $newPet->load('tags');
-
-            // 3. Successful JSON Response (201 Created) using PetstoreResource
-            return response()->json([
-                'message' => 'Pet successfully registered.',
-                'data' => new PetstoreResource($newPet)
-            ], 201);
-            
-        } catch (\Exception $e) {
-            \Log::error('Pet Store Error: ' . $e->getMessage());
-            return response()->json([
-                'message' => 'Internal server error during pet creation.',
-                'error' => 'Database operation failed. Ensure your migrations are run and tables exist.'
-            ], 500); 
-        } 
+            return response()->json($record, 201); // Return the created record with a 201 status
     }
 
     /**

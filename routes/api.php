@@ -30,19 +30,14 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-Route::resource('petstore', PetController::class);
+// Themeswitcher API routes - Public access for demo purposes
+// Note: These routes use inline CSRF token headers for POST operations
+Route::group([], function () {
+    // Petstore routes for themeswitcher (demo - public access)
+    Route::resource('petstore', PetController::class);
 
-// Social Media Posts API routes
-Route::middleware('auth:sanctum')->group(function () {
+    // Social Media Posts API routes (demo - public access)
     Route::apiResource('social-media-posts', SocialMediaPostController::class);
-});
-
-// Settings API routes
-Route::prefix('settings')->group(function () {
-    Route::get('/', [SettingsController::class, 'index']);
-    Route::put('/', [SettingsController::class, 'update']);
-    Route::post('/reset', [SettingsController::class, 'reset']);
-    Route::get('/bootstrap', [SettingsController::class, 'bootstrap']);
 });
 
 Route::get('/user', function (Request $request) {

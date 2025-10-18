@@ -212,7 +212,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     create.form = createForm
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
 export const show = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -227,7 +227,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
 show.url = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -255,7 +255,7 @@ show.url = (args: { petstore: string | number } | [petstore: string | number ] |
 
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
 show.get = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -264,7 +264,7 @@ show.get = (args: { petstore: string | number } | [petstore: string | number ] |
 })
 /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
 show.head = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -274,7 +274,7 @@ show.head = (args: { petstore: string | number } | [petstore: string | number ] 
 
     /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
     const showForm = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -284,7 +284,7 @@ show.head = (args: { petstore: string | number } | [petstore: string | number ] 
 
             /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
         showForm.get = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -293,7 +293,7 @@ show.head = (args: { petstore: string | number } | [petstore: string | number ] 
         })
             /**
 * @see \App\Http\Controllers\PetController::show
- * @see app/Http/Controllers/PetController.php:82
+ * @see app/Http/Controllers/PetController.php:64
  * @route '/api/petstore/{petstore}'
  */
         showForm.head = (args: { petstore: string | number } | [petstore: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

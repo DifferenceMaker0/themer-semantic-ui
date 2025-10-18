@@ -1,8 +1,7 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Sparkles, Wand2, Save, Loader2 } from 'lucide-react';
 import { useSocialMedia } from '../../providers/social-media-provider';
-import { InvokeLLM } from '../../services/gemini-service';
+import { InvokeLLM } from '@/integrations/Core';
 
 // Components
 import { SocialTemplateSelector, SocialPlatformSelector } from '../generator/template-selector';
@@ -27,8 +26,7 @@ export function SocialMediaGeneratorPage() {
         setIsGenerating,
         isSaving,
         setIsSaving,
-        addSavedPost,
-        clearForm
+        addSavedPost
     } = useSocialMedia();
 
     // Generate post content using AI
@@ -37,24 +35,30 @@ export function SocialMediaGeneratorPage() {
 
         setIsGenerating(true);
         try {
-            const platformGuidelines = {
+            const platformGuidelines: Record<string, string> = {
                 instagram: "Keep it visual and engaging, 150-300 words with line breaks for readability",
                 twitter: "Keep it concise and punchy, max 280 characters",
                 linkedin: "Professional and insightful, 150-400 words with clear structure",
                 facebook: "Friendly and conversational, 150-300 words"
             };
 
-            const result = await InvokeLLM({
-                prompt: `Create an engaging ${selectedPlatform} post about: ${topic} 
+            const response = await InvokeLLM({
+                prompt: `Create an engaging ${selectedPlatform} post about: ${topic}
                 Style: ${selectedTemplate.tone}
-                Platform: ${platformGuidelines[selectedPlatform]} 
+                Platform: ${platformGuidelines[selectedPlatform]}
                 Make it authentic, relatable, and optimized for engagement. Do not include hashtags in the content.
                 Include emojis where appropriate.`,
                 add_context_from_internet: true
             });
 
-            if (typeof result === 'string') {
-                setGeneratedContent(result);
+            // Handle response - InvokeLLM returns LLMResponse object
+            if (response && typeof response === 'object' && 'response' in response) {
+                setGeneratedContent(response.response as string);
+            } else if (typeof response === 'string') {
+                // Fallback for direct string response
+                setGeneratedContent(response);
+            } else {
+                setGeneratedContent('Generated content not available');
             }
         } catch (error) {
             console.error("Error generating post:", error);

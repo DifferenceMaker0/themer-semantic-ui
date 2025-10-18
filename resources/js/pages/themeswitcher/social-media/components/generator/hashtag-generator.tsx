@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Hash, Plus, X, Sparkles, Loader2 } from 'lucide-react';
 import { useSocialMedia } from '../../providers/social-media-provider';
-import { InvokeLLM } from '../../services/gemini-service';
+import { InvokeLLM } from '@/integrations/Core';
 import { SocialButton, SocialBadge, SocialInput } from '../ui/social-button';
 
 /**
@@ -29,14 +29,15 @@ export function SocialHashtagGenerator() {
         setIsGenerating(true);
         try {
             const content = generatedContent || topic;
-            const result = await InvokeLLM({
-                prompt: `Generate 15 relevant and trending hashtags for this ${selectedPlatform} post: "${content}". 
+            const response = await InvokeLLM({
+                prompt: `Generate 15 relevant and trending hashtags for this ${selectedPlatform} post: "${content}".
                 Focus on hashtags that are:
                 - Relevant to the content
                 - Popular but not oversaturated
                 - Mix of broad and niche hashtags
                 - Appropriate for ${selectedPlatform}
                 Return only the hashtags without the # symbol.`,
+                add_context_from_internet: true,
                 response_json_schema: {
                     type: "object",
                     properties: {
@@ -48,8 +49,11 @@ export function SocialHashtagGenerator() {
                 }
             });
 
-            if (result && typeof result === 'object' && 'hashtags' in result) {
-                addHashtags(result.hashtags);
+            // Handle structured response from InvokeLLM
+            if (response && typeof response === 'object' && 'hashtags' in response) {
+                addHashtags(response.hashtags as string[]);
+            } else {
+                console.warn('Unexpected response format from InvokeLLM:', response);
             }
         } catch (error) {
             console.error("Error generating hashtags:", error);

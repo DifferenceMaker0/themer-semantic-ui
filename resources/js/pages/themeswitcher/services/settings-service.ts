@@ -1,4 +1,5 @@
 // Settings Service for persistent configuration management
+// Removed CSRF utilities - using Sanctum authentication instead
 
 export interface UserSettings {
     theme: 'light' | 'dark' | 'theme-a' | 'theme-b';
@@ -47,10 +48,14 @@ class SettingsService {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
                 },
-                credentials: 'same-origin'
+                credentials: 'same-origin', // Include session cookies for Sanctum
             });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
 
             const result: SettingsResponse = await response.json();
 
@@ -76,11 +81,15 @@ class SettingsService {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
                 },
-                credentials: 'same-origin',
+                credentials: 'same-origin', // Include session cookies for Sanctum
                 body: JSON.stringify(settings)
             });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
 
             const result: SettingsResponse = await response.json();
 
@@ -90,7 +99,7 @@ class SettingsService {
 
             // Update cache
             this.cache = result.data as UserSettings;
-            
+
             // Update localStorage for immediate theme application
             if (settings.theme) {
                 localStorage.setItem(this.STORAGE_KEY, settings.theme);
@@ -112,10 +121,14 @@ class SettingsService {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
                 },
-                credentials: 'same-origin'
+                credentials: 'same-origin', // Include session cookies for Sanctum
             });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
 
             const result: SettingsResponse = await response.json();
 
@@ -150,10 +163,14 @@ class SettingsService {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
                 },
-                credentials: 'same-origin'
+                credentials: 'same-origin', // Include session cookies for Sanctum
             });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
 
             const result: SettingsResponse = await response.json();
 
@@ -196,18 +213,18 @@ class SettingsService {
     async initialize(): Promise<BootstrapData> {
         try {
             const bootstrapData = await this.getBootstrapData();
-            
+
             // Apply theme immediately
             this.applyTheme(bootstrapData.theme);
-            
+
             return bootstrapData;
         } catch (error) {
             console.error('Failed to initialize settings:', error);
-            
+
             // Fallback initialization
             const fallbackTheme = this.getCurrentTheme();
             this.applyTheme(fallbackTheme);
-            
+
             return this.getFallbackBootstrapData();
         }
     }
@@ -218,7 +235,7 @@ class SettingsService {
     async verifySettings(): Promise<boolean> {
         try {
             const settings = await this.getUserSettings();
-            
+
             // Check theme validity
             const validThemes = ['light', 'dark', 'theme-a', 'theme-b'];
             if (!validThemes.includes(settings.theme)) {
@@ -253,7 +270,7 @@ class SettingsService {
      */
     private getFallbackSettings(): UserSettings {
         const theme = this.getCurrentTheme() as UserSettings['theme'];
-        
+
         return {
             theme,
             settings: {
@@ -271,7 +288,7 @@ class SettingsService {
      */
     private getFallbackBootstrapData(): BootstrapData {
         const theme = this.getCurrentTheme();
-        
+
         return {
             user_type: 'guest',
             theme,

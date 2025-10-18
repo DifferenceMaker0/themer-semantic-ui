@@ -1,6 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Pet } from '@/types';
 import { Store, Plus, RotateCcw, Eye, X } from 'lucide-react';
+import { csrfApiRequest, createCSRFHeaders } from '../utils/csrf-utils';
+
+// Pet interface
+interface Pet { 
+    id?: number;
+    name: string;
+    age: number;
+    species?: string;  
+}
 
 // API utility functions
 const API_BASE = '/api/petstore';
@@ -10,9 +18,9 @@ const fetchPets = async (): Promise<Pet[]> => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json',
         },
-        credentials: 'same-origin',
+        credentials: 'same-origin', // Include session cookies for Sanctum
     });
     if (!response.ok) {
         throw new Error('Failed to fetch pets');
@@ -22,23 +30,11 @@ const fetchPets = async (): Promise<Pet[]> => {
 };
 
 const createPet = async (petData: { name: string; age: number; species?: string }): Promise<Pet> => {
-    const queryParams = new URLSearchParams({
-        name: petData.name,
-        age: petData.age.toString(),
-        ...(petData.species && { species: petData.species })
-    });
-
-    // Get CSRF token from meta tag
-    const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-
-    const response = await fetch(`${API_BASE}?${queryParams}`, {
+    const response = await fetch(API_BASE, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            ...(token && { 'X-CSRF-TOKEN': token }),
-        },
-        credentials: 'same-origin', // Important for CSRF protection
+        headers: createCSRFHeaders() as HeadersInit,
+        credentials: 'same-origin',
+        body: JSON.stringify(petData)
     });
 
     if (!response.ok) {
@@ -47,7 +43,7 @@ const createPet = async (petData: { name: string; age: number; species?: string 
     }
 
     const result = await response.json();
-    return result.data;
+    return result;
 };
 
 const fetchPetDetails = async (id: number): Promise<Pet> => {
@@ -55,9 +51,9 @@ const fetchPetDetails = async (id: number): Promise<Pet> => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json',
         },
-        credentials: 'same-origin',
+        credentials: 'same-origin', // Include session cookies for Sanctum
     });
     if (!response.ok) {
         throw new Error('Failed to fetch pet details');
@@ -217,7 +213,7 @@ const PetDetailDialog: React.FC<{ petId: number | null; onClose: () => void }> =
                                 <strong>Species:</strong> {pet.species}
                             </div>
                         )}
-                        {pet.tags && pet.tags.length > 0 && (
+                        {/* {pet.tags && pet.tags.length > 0 && (
                             <div>
                                 <strong>Tags:</strong>
                                 <div className="flex flex-wrap gap-1 mt-1">
@@ -231,7 +227,7 @@ const PetDetailDialog: React.FC<{ petId: number | null; onClose: () => void }> =
                                     ))}
                                 </div>
                             </div>
-                        )}
+                        )} */}
                     </div>
                 )}
             </div>
@@ -327,7 +323,7 @@ export const PetstoreWidget: React.FC = () => {
                                             <p className="text-sm text-gray-600 dark:text-gray-400">
                                                 {pet.age} yrs old
                                                 {pet.species && `, ${pet.species}`}
-                                                {pet.tags.length > 0 && `, ${pet.tags.length} tags`}
+                                                {/* {pet.tags.length > 0 && `, ${pet.tags.length} tags`} */}
                                             </p>
                                         </div>
                                         <button
